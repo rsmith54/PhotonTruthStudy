@@ -57,6 +57,7 @@ class PhotonTruthAlg
 
   float m_refy_ptmin;
   float	m_refy_ptmax;
+  float m_jetRJcut;
 
   PhysObjProxyUtils * m_proxyUtils;
 

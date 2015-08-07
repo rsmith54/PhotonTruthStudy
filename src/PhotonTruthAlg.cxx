@@ -6,7 +6,8 @@
 
 // PhotonTruthStudy includes
 #include "PhotonTruthAlg.h"
-
+#include "PhotonTruthStudy/PhysObjProxies.h"
+#include "PhotonTruthStudy/PhysObjProxyUtils.h"
 // STL includes
 
 // FrameWork includes
@@ -18,7 +19,7 @@
 #include "xAODJet/JetContainer.h"
 #include "xAODTruth/TruthParticleContainer.h"
 #include "xAODEventInfo/EventInfo.h"
-#include "PhotonTruthStudy/PhysObjProxies.h"
+#include "xAODMissingET/MissingETContainer.h"
 
 using namespace xAOD;
 
@@ -30,7 +31,8 @@ using namespace xAOD;
 ////////////////
 PhotonTruthAlg::PhotonTruthAlg( const std::string& name,
 			  ISvcLocator* pSvcLocator ) :
-  ::AthHistogramAlgorithm( name, pSvcLocator )
+  ::AthHistogramAlgorithm( name, pSvcLocator ),
+  m_proxyUtils(nullptr)
 {
   //
   // Property declaration
@@ -38,6 +40,7 @@ PhotonTruthAlg::PhotonTruthAlg( const std::string& name,
 
   declareProperty( "PhotonRef_PtMin", m_refy_ptmin=0 );
   declareProperty( "PhotonRef_PtMax", m_refy_ptmax=1e9 );
+  declareProperty( "JetRJCut", m_jetRJcut=30000. );
 
 }
 
@@ -55,6 +58,9 @@ StatusCode PhotonTruthAlg::initialize()
   ATH_CHECK( book( TH1D("EvtsProcessed", "EvtsProcessed",  2, 0., 2 ) ) );
   hist("EvtsProcessed")->Fill("NEvents",0.);
   hist("EvtsProcessed")->Fill("SumWeights",0.);
+
+  m_proxyUtils = new PhysObjProxyUtils(false);
+  m_proxyUtils->RJigsawInit();
 
   double fac = sqrt(sqrt(sqrt(2)));
   double ptbins[57];
@@ -79,11 +85,52 @@ StatusCode PhotonTruthAlg::initialize()
   ATH_CHECK( book( TH1D("Photon_dPhiJet","Photon_dPhiJet", 128, -3.2, 3.2 ) ) );
   ATH_CHECK( book( TH1D("Photon_dRjmin", "Photon_dRjmin",  100, 0, 5      ) ) );
   //
-  ATH_CHECK( book( TH1D("Njet20",        "Njet20",         20,  0, 20     ) ) );
-  ATH_CHECK( book( TH1D("Njet30",        "Njet30",         20,  0, 20     ) ) );
-  ATH_CHECK( book( TH1D("Njet60",        "Njet60",         20,  0, 20     ) ) );
+  ATH_CHECK( book( TH1D("Njet20" ,        "Njet20",         20,  0, 20     ) ) );
+  ATH_CHECK( book( TH1D("Njet30" ,        "Njet30",         20,  0, 20     ) ) );
+  ATH_CHECK( book( TH1D("Njet60" ,        "Njet60",         20,  0, 20     ) ) );
   ATH_CHECK( book( TH1D("Njet100",       "Njet100",        20,  0, 20     ) ) );
   ATH_CHECK( book( TH1D("Njet250",       "Njet250",        20,  0, 20     ) ) );
+
+  ATH_CHECK( book( TH1D("RJVars_PP_Mass"        ,     "RJVars_PP_Mass"            ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_PP_InvGamma"	  ,   "RJVars_PP_InvGamma"	  ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_PP_dPhiBetaR"	  ,   "RJVars_PP_dPhiBetaR"	  ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_PP_dPhiVis"	  ,   "RJVars_PP_dPhiVis"	  ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_PP_CosTheta"	  ,   "RJVars_PP_CosTheta"	  ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_PP_dPhiDecayAngle", "RJVars_PP_dPhiDecayAngle",    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_PP_VisShape"	  ,   "RJVars_PP_VisShape"	  ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_PP_MDeltaR"	  ,   "RJVars_PP_MDeltaR"	  ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_P1_Mass"	  ,   "RJVars_P1_Mass"	  ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_P1_CosTheta"	  ,   "RJVars_P1_CosTheta"	  ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_P2_Mass"          , "RJVars_P2_Mass"          ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_P2_CosTheta"	  ,   "RJVars_P2_CosTheta"	  ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_I1_Depth"	  ,   "RJVars_I1_Depth"	  ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_I2_Depth"	  ,   "RJVars_I2_Depth"	  ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_V1_N"	  ,	      "RJVars_V1_N"	  ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_V2_N"            ,  "RJVars_V2_N"            ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_MG"		 ,    "RJVars_MG"		 ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_DeltaBetaGG"	 ,    "RJVars_DeltaBetaGG"	 ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_dphiVG"	 ,    "RJVars_dphiVG"	         ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_P_0_CosTheta"	 ,    "RJVars_P_0_CosTheta"	 ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_C_0_CosTheta"   ,   "RJVars_C_0_CosTheta"   ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_P_0_dPhiGC"	,     "RJVars_P_0_dPhiGC"	,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_P_0_MassRatioGC",   "RJVars_P_0_MassRatioGC",    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_P_0_Jet1_pT"	,     "RJVars_P_0_Jet1_pT"	,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_P_0_Jet2_pT"	,     "RJVars_P_0_Jet2_pT"	,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_P_0_PInvHS"      ,  "RJVars_P_0_PInvHS"      ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_P_1_CosTheta"    ,  "RJVars_P_1_CosTheta"    ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_C_1_CosTheta"	 ,    "RJVars_C_1_CosTheta"	 ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_P_1_dPhiGC"	 ,    "RJVars_P_1_dPhiGC"	 ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_P_1_MassRatioGC" ,  "RJVars_P_1_MassRatioGC" ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_P_1_Jet1_pT",	      "RJVars_P_1_Jet1_pT",    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_P_1_Jet2_pT",	      "RJVars_P_1_Jet2_pT",    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_P_1_PInvHS" ,	      "RJVars_P_1_PInvHS" ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_QCD_dPhiR"  ,	      "RJVars_QCD_dPhiR"  ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_QCD_Rpt"    ,	      "RJVars_QCD_Rpt"    ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_QCD_Rmsib"  ,	      "RJVars_QCD_Rmsib"  ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_QCD_Rpsib"  ,	      "RJVars_QCD_Rpsib"  ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_QCD_Delta1" ,	      "RJVars_QCD_Delta1" ,    100 , 0,2000 )));
+  ATH_CHECK( book( TH1D("RJVars_QCD_Delta2" ,       "RJVars_QCD_Delta2" ,    100 , 0,2000 )));
+
 
   hist("Photon_refpt")->Sumw2();
   hist("Photon_fspt")->Sumw2();
@@ -115,6 +162,8 @@ StatusCode PhotonTruthAlg::execute()
 {
   ATH_MSG_DEBUG ("Executing " << name() << "...");
 
+
+
   const TruthParticleContainer* truthColl(0);
   ATH_CHECK( evtStore()->retrieve(truthColl,"TruthParticles") );
 
@@ -145,12 +194,27 @@ StatusCode PhotonTruthAlg::execute()
   hist("EvtsProcessed")->Fill("NEvents",1);
   hist("EvtsProcessed")->Fill("SumWeights",weight);
 
+  const MissingETContainer* met_truth(0);
+  ATH_CHECK( evtStore()->retrieve(met_truth,"MET_Truth") );
+  const MissingET* truthmet = (*met_truth)["NonInt"];
+
   const Jet* jet_lead(0);
   const JetContainer* truthJets(0);
   float dRmin(99.);
   ATH_CHECK( evtStore()->retrieve(truthJets,"AntiKt4TruthJets") );
   size_t Nj20(0), Nj30(0), Nj60(0), Nj100(0), Nj250(0);
+
+  std::vector<JetProxy> truth_jets_proxy;
+
   for(const auto&  jet : *truthJets) {
+
+    JetProxy const jetproxy(jet->p4(),
+			    true,
+			    false,
+			    true,
+			    true);
+    truth_jets_proxy.push_back(jetproxy);
+
     float dR = photon_lead->p4().DeltaR(jet->p4());
     if(dR<0.2) continue;
     if(jet->pt()>10e3) {
@@ -167,6 +231,15 @@ StatusCode PhotonTruthAlg::execute()
       if(jet->pt()>250e3) ++Nj250;
     }
   }
+
+
+  std::map<TString,float> RJigsawVariables;
+  m_proxyUtils->CalculateRJigsawVariables(truth_jets_proxy,
+					 truthmet->mpx(),
+					 truthmet->mpy(),
+					 RJigsawVariables,
+					 m_jetRJcut
+					 );
 
   hist("Photon_refpt")->Fill(photon_ref->pt()/1e3,weight);
   hist("Photon_fspt")->Fill(photon_lead->pt()/1e3,weight);
@@ -187,6 +260,47 @@ StatusCode PhotonTruthAlg::execute()
   hist("Njet60")->Fill(Nj60,weight);
   hist("Njet100")->Fill(Nj100,weight);
   hist("Njet250")->Fill(Nj250,weight);
+
+  hist("RJVars_PP_Mass")->Fill(RJigsawVariables["RJVars_PP_Mass"]);
+  hist("RJVars_PP_InvGamma")->Fill(RJigsawVariables["RJVars_PP_InvGamma"]);
+  hist("RJVars_PP_dPhiBetaR")->Fill(RJigsawVariables["RJVars_PP_dPhiBetaR"]);
+  hist("RJVars_PP_dPhiVis")->Fill(RJigsawVariables["RJVars_PP_dPhiVis"]);
+  hist("RJVars_PP_CosTheta")->Fill(RJigsawVariables["RJVars_PP_CosTheta"]);
+  hist("RJVars_PP_dPhiDecayAngle")->Fill(RJigsawVariables["RJVars_PP_dPhiDecayAngle"]);
+  hist("RJVars_PP_VisShape")->Fill(RJigsawVariables["RJVars_PP_VisShape"]);
+  hist("RJVars_PP_MDeltaR")->Fill(RJigsawVariables["RJVars_PP_MDeltaR"]);
+  hist("RJVars_P1_Mass")->Fill(RJigsawVariables["RJVars_P1_Mass"]);
+  hist("RJVars_P1_CosTheta")->Fill(RJigsawVariables["RJVars_P1_CosTheta"]);
+  hist("RJVars_P2_Mass")->Fill(RJigsawVariables["RJVars_P2_Mass"]);
+  hist("RJVars_P2_CosTheta")->Fill(RJigsawVariables["RJVars_P2_CosTheta"]);
+  hist("RJVars_I1_Depth")->Fill(RJigsawVariables["RJVars_I1_Depth"]);
+  hist("RJVars_I2_Depth")->Fill(RJigsawVariables["RJVars_I2_Depth"]);
+  hist("RJVars_V1_N")->Fill(RJigsawVariables["RJVars_V1_N"]);
+  hist("RJVars_V2_N")->Fill(RJigsawVariables["RJVars_V2_N"]);
+  hist("RJVars_MG")->Fill(RJigsawVariables["RJVars_MG"]);
+  hist("RJVars_DeltaBetaGG")->Fill(RJigsawVariables["RJVars_DeltaBetaGG"]);
+  hist("RJVars_dphiVG")->Fill(RJigsawVariables["RJVars_dphiVG"]);
+  hist("RJVars_P_0_CosTheta")->Fill(RJigsawVariables["RJVars_P_0_CosTheta"]);
+  hist("RJVars_C_0_CosTheta")->Fill(RJigsawVariables["RJVars_C_0_CosTheta"]);
+  hist("RJVars_P_0_dPhiGC")->Fill(RJigsawVariables["RJVars_P_0_dPhiGC"]);
+  hist("RJVars_P_0_MassRatioGC")->Fill(RJigsawVariables["RJVars_P_0_MassRatioGC"]);
+  hist("RJVars_P_0_Jet1_pT")->Fill(RJigsawVariables["RJVars_P_0_Jet1_pT"]);
+  hist("RJVars_P_0_Jet2_pT")->Fill(RJigsawVariables["RJVars_P_0_Jet2_pT"]);
+  hist("RJVars_P_0_PInvHS")->Fill(RJigsawVariables["RJVars_P_0_PInvHS"]);
+  hist("RJVars_P_1_CosTheta")->Fill(RJigsawVariables["RJVars_P_1_CosTheta"]);
+  hist("RJVars_C_1_CosTheta")->Fill(RJigsawVariables["RJVars_C_1_CosTheta"]);
+  hist("RJVars_P_1_dPhiGC")->Fill(RJigsawVariables["RJVars_P_1_dPhiGC"]);
+  hist("RJVars_P_1_MassRatioGC")->Fill(RJigsawVariables["RJVars_P_1_MassRatioGC"]);
+  hist("RJVars_P_1_Jet1_pT")->Fill(RJigsawVariables["RJVars_P_1_Jet1_pT"]);
+  hist("RJVars_P_1_Jet2_pT")->Fill(RJigsawVariables["RJVars_P_1_Jet2_pT"]);
+  hist("RJVars_P_1_PInvHS")->Fill(RJigsawVariables["RJVars_P_1_PInvHS"]);
+  hist("RJVars_QCD_dPhiR")->Fill(RJigsawVariables["RJVars_QCD_dPhiR"]);
+  hist("RJVars_QCD_Rpt")->Fill(RJigsawVariables["RJVars_QCD_Rpt"]);
+  hist("RJVars_QCD_Rmsib")->Fill(RJigsawVariables["RJVars_QCD_Rmsib"]);
+  hist("RJVars_QCD_Rpsib")->Fill(RJigsawVariables["RJVars_QCD_Rpsib"]);
+  hist("RJVars_QCD_Delta1")->Fill(RJigsawVariables["RJVars_QCD_Delta1"]);
+  hist("RJVars_QCD_Delta2")->Fill(RJigsawVariables["RJVars_QCD_Delta2"]);
+
 
   return StatusCode::SUCCESS;
 }
@@ -212,3 +326,5 @@ StatusCode PhotonTruthAlg::execute()
 ///////////////////////////////////////////////////////////////////
 
 
+
+//  LocalWords:  Njet
