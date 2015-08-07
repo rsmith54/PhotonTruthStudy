@@ -1,4 +1,4 @@
-#include "ZeroLeptonRun2/PhysObjProxies.h"
+#include "PhotonTruthStudy/PhysObjProxies.h"
 
 #include "xAODJet/Jet.h"
 #include "xAODEgamma/Electron.h"
@@ -157,7 +157,7 @@ TauProxy::TauProxy():
   m_sfStatDown(0.f),
   m_sfSystUp(0.f),
   m_sfSystDown(0.f),
-  m_tau(0) 
+  m_tau(0)
 {
 }
 
