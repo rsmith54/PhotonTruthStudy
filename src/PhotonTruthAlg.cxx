@@ -236,11 +236,13 @@ StatusCode PhotonTruthAlg::execute()
 
   std::map<TString,float> RJigsawVariables;
   m_proxyUtils->CalculateRJigsawVariables(truth_jets_proxy,
-					 truthmet->mpx(),
-					 truthmet->mpy(),
-					 RJigsawVariables,
-					 m_jetRJcut
-					 );
+					 // truthmet->mpx(),
+					 // truthmet->mpy(),
+					  photon_lead->p4()->Px() + truthmet->mpx(),
+					  photon_lead->p4()->Py() + truthmet->mpy(),
+					  RJigsawVariables,
+					  m_jetRJcut
+					  );
 
   hist("Photon_refpt")->Fill(photon_ref->pt()/1e3,weight);
   hist("Photon_fspt")->Fill(photon_lead->pt()/1e3,weight);
