@@ -169,8 +169,7 @@ StatusCode ZbosonTruthAlg::execute()
   ATH_CHECK( evtStore()->retrieve(truthColl,"TruthParticles") );
 
   const TruthParticleContainer* truthNus(0);
-  ATH_CHECK( evtStore()->retrieve(truthColl,"TruthNeutrinos") );
-
+  ATH_CHECK( evtStore()->retrieve(truthNus,"TruthNeutrinos") );
 
   TLorentzVector zboson_ref;
   TLorentzVector zboson_lead;
@@ -178,10 +177,13 @@ StatusCode ZbosonTruthAlg::execute()
   const TruthParticle *leadnu1(0), *leadnu2(0);
   for(const auto& truthP : *truthColl) {
     if( abs(truthP->pdgId())==12 || abs(truthP->pdgId())==14 || abs(truthP->pdgId())==16) {
+      //std::cout << __PRETTY_FUNCTION__ << " at line : " << __LINE__ << std::endl;
       if(truthP->status()==3) {
+      //std::cout << __PRETTY_FUNCTION__ << " at line : " << __LINE__ << std::endl;
 	if(!refnu1) refnu1 = truthP;
 	else if(!refnu2) refnu2 = truthP;
 	else if(truthP->pt() > refnu2->pt()){
+      //std::cout << __PRETTY_FUNCTION__ << " at line : " << __LINE__ << std::endl;
 	  refnu1 = (refnu2->pt() >  truthP->pt()) ? refnu2 : truthP;
 	  refnu2 = (refnu2->pt() <= truthP->pt()) ? refnu2 : truthP;
 	}
@@ -190,13 +192,17 @@ StatusCode ZbosonTruthAlg::execute()
       }
     }
   }
+  //std::cout << __PRETTY_FUNCTION__ << " at line : " << __LINE__ << std::endl;
+  //std::cout << " nu size " << truthNus->size() << std::endl;
 
-  for(const auto& truthP : *truthNus) {
-    if(!leadnu1) leadnu1 = truthP;
-    else if(!leadnu2) leadnu2 = truthP;
-    else if(truthP->pt() > leadnu2->pt()){
-      leadnu1 = (leadnu2->pt() >  truthP->pt()) ? leadnu2 : truthP;
-      leadnu2 = (leadnu2->pt() <= truthP->pt()) ? leadnu2 : truthP;
+  for(const auto& truthNu : *truthNus) {
+    //std::cout << __PRETTY_FUNCTION__ << " at line : " << __LINE__ << std::endl;
+    if(!leadnu1) leadnu1 = truthNu;
+    else if(!leadnu2) leadnu2 = truthNu;
+    else if(truthNu->pt() > leadnu2->pt()){
+      //std::cout << __PRETTY_FUNCTION__ << " at line : " << __LINE__ << std::endl;
+      leadnu1 = (leadnu2->pt() >  truthNu->pt()) ? leadnu2 : truthNu;
+      leadnu2 = (leadnu2->pt() <= truthNu->pt()) ? leadnu2 : truthNu;
     }
   }
 
