@@ -6,6 +6,7 @@ from AthenaCommon import CfgMgr
 from glob import glob
 from AthenaCommon.AlgSequence import AlgSequence
 from OutputStreamAthenaPool.MultipleStreamManager import MSMgr
+
 from AthenaCommon.AppMgr import theApp
 
 def studyPhotonTruth(filelist = None) :
