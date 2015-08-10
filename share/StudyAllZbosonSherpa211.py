@@ -1,6 +1,5 @@
 from StudyZbosonTruthSherpa211 import *
 
-
 import os
 
 from optparse import OptionParser
