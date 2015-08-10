@@ -168,6 +168,10 @@ StatusCode ZbosonTruthAlg::execute()
   const TruthParticleContainer* truthColl(0);
   ATH_CHECK( evtStore()->retrieve(truthColl,"TruthParticles") );
 
+  const TruthParticleContainer* truthNus(0);
+  ATH_CHECK( evtStore()->retrieve(truthColl,"TruthNeutrinos") );
+
+
   TLorentzVector zboson_ref;
   TLorentzVector zboson_lead;
   const TruthParticle *refnu1(0), *refnu2(0);
@@ -176,24 +180,28 @@ StatusCode ZbosonTruthAlg::execute()
     if( abs(truthP->pdgId())==12 || abs(truthP->pdgId())==14 || abs(truthP->pdgId())==16) {
       if(truthP->status()==3) {
 	if(!refnu1) refnu1 = truthP;
-	else refnu2 = truthP;
-      } else if(truthP->status()==1) {
-	if(leadnu1) {
-	  if(truthP->pt()>leadnu1->pt()) {
-	    leadnu2 = leadnu1;
-	    leadnu1 = truthP;
-	  } else if(!leadnu2 || truthP->pt()>leadnu2->pt()) {
-	    leadnu2 = truthP;
-	  }
-	} else {
-	  leadnu1 = truthP;
+	else if(!refnu2) refnu2 = truthP;
+	else if(truthP->pt() > refnu2->pt()){
+	  refnu1 = (refnu2->pt() >  truthP->pt()) ? refnu2 : truthP;
+	  refnu2 = (refnu2->pt() <= truthP->pt()) ? refnu2 : truthP;
 	}
+	// if(!refnu1) refnu1 = truthP;
+	// else refnu2 = truthP;
       }
     }
-    if(refnu1 && refnu2 && leadnu1 && leadnu2) break;
   }
+
+  for(const auto& truthP : *truthNus) {
+    if(!leadnu1) leadnu1 = truthP;
+    else if(!leadnu2) leadnu2 = truthP;
+    else if(truthP->pt() > leadnu2->pt()){
+      leadnu1 = (leadnu2->pt() >  truthP->pt()) ? leadnu2 : truthP;
+      leadnu2 = (leadnu2->pt() <= truthP->pt()) ? leadnu2 : truthP;
+    }
+  }
+
   if(!refnu1 || !refnu2 || !leadnu1 ||!leadnu2) {
-    ATH_MSG_WARNING("How bizarre, an event with no zboson!");
+    ATH_MSG_WARNING("Event without a zboson!");
     return StatusCode::SUCCESS;
   }
   zboson_ref += refnu1->p4();
@@ -252,11 +260,11 @@ StatusCode ZbosonTruthAlg::execute()
 
   std::map<TString,float> RJigsawVariables;
   m_proxyUtils->CalculateRJigsawVariables(truth_jets_proxy,
-					 truthmet->mpx(),
-					 truthmet->mpy(),
-					 RJigsawVariables,
-					 m_jetRJcut
-					 );
+					  truthmet->mpx(),
+					  truthmet->mpy(),
+					  RJigsawVariables,
+					  m_jetRJcut
+					  );
 
   hist("Zboson_refpt")->Fill(zboson_ref.Pt()/1e3,weight);
   hist("Zboson_fspt")->Fill(zboson_lead.Pt()/1e3,weight);
