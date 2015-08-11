@@ -238,8 +238,8 @@ StatusCode PhotonTruthAlg::execute()
   m_proxyUtils->CalculateRJigsawVariables(truth_jets_proxy,
 					 // truthmet->mpx(),
 					 // truthmet->mpy(),
-					  photon_lead->p4().Px() + truthmet->mpx(),
-					  photon_lead->p4().Py() + truthmet->mpy(),
+					  photon_lead->p4().Px() + truthmet->mpx() + 1,//todo remove!!!
+					  photon_lead->p4().Py() + truthmet->mpy() + 1,
 					  RJigsawVariables,
 					  m_jetRJcut
 					  );
