@@ -91,46 +91,46 @@ StatusCode PhotonTruthAlg::initialize()
   ATH_CHECK( book( TH1D("Njet100",       "Njet100",        20,  0, 20     ) ) );
   ATH_CHECK( book( TH1D("Njet250",       "Njet250",        20,  0, 20     ) ) );
 
+
   ATH_CHECK( book( TH1D("RJVars_PP_Mass"        ,     "RJVars_PP_Mass"            ,    100 , 0,2e6 )));
   ATH_CHECK( book( TH1D("RJVars_PP_InvGamma"	  ,   "RJVars_PP_InvGamma"	  ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_PP_dPhiBetaR"	  ,   "RJVars_PP_dPhiBetaR"	  ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_PP_dPhiVis"	  ,   "RJVars_PP_dPhiVis"	  ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_PP_CosTheta"	  ,   "RJVars_PP_CosTheta"	  ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_PP_dPhiDecayAngle", "RJVars_PP_dPhiDecayAngle",    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_PP_VisShape"	  ,   "RJVars_PP_VisShape"	  ,    100 , 0,2e6 )));
+  ATH_CHECK( book( TH1D("RJVars_PP_dPhiBetaR"	  ,   "RJVars_PP_dPhiBetaR"	  , 128, -3.2, 3.2 )));
+  ATH_CHECK( book( TH1D("RJVars_PP_dPhiVis"	  ,   "RJVars_PP_dPhiVis"	  , 128, -3.2, 3.2 )));
+  ATH_CHECK( book( TH1D("RJVars_PP_CosTheta"	  ,   "RJVars_PP_CosTheta"	  , 128, -3.2, 3.2 )));
+  ATH_CHECK( book( TH1D("RJVars_PP_dPhiDecayAngle", "RJVars_PP_dPhiDecayAngle", 128, -3.2, 3.2 )));
+  ATH_CHECK( book( TH1D("RJVars_PP_VisShape"	  ,   "RJVars_PP_VisShape"	  , 128, -3.2, 3.2 )));
   ATH_CHECK( book( TH1D("RJVars_PP_MDeltaR"	  ,   "RJVars_PP_MDeltaR"	  ,    100 , 0,2e6 )));
   ATH_CHECK( book( TH1D("RJVars_P1_Mass"	  ,   "RJVars_P1_Mass"	  ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_P1_CosTheta"	  ,   "RJVars_P1_CosTheta"	  ,    100 , 0,2e6 )));
+  ATH_CHECK( book( TH1D("RJVars_P1_CosTheta"	  ,   "RJVars_P1_CosTheta"	  , 128, -3.2, 3.2 )));
   ATH_CHECK( book( TH1D("RJVars_P2_Mass"          , "RJVars_P2_Mass"          ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_P2_CosTheta"	  ,   "RJVars_P2_CosTheta"	  ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_I1_Depth"	  ,   "RJVars_I1_Depth"	  ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_I2_Depth"	  ,   "RJVars_I2_Depth"	  ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_V1_N"	  ,	      "RJVars_V1_N"	  ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_V2_N"            ,  "RJVars_V2_N"            ,    100 , 0,2e6 )));
+  ATH_CHECK( book( TH1D("RJVars_P2_CosTheta"	  ,   "RJVars_P2_CosTheta"	  , 128, -3.2, 3.2 )));
+  ATH_CHECK( book( TH1D("RJVars_I1_Depth"	  ,   "RJVars_I1_Depth"	  , 128, -3.2, 3.2 )));
+  ATH_CHECK( book( TH1D("RJVars_I2_Depth"	  ,   "RJVars_I2_Depth"	  , 128, -3.2, 3.2 )));
+  ATH_CHECK( book( TH1D("RJVars_V1_N"	  ,	      "RJVars_V1_N"	  ,    100 , 0,20 )));
+  ATH_CHECK( book( TH1D("RJVars_V2_N"            ,  "RJVars_V2_N"            ,    100 , 0,20 )));
   ATH_CHECK( book( TH1D("RJVars_MG"		 ,    "RJVars_MG"		 ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_DeltaBetaGG"	 ,    "RJVars_DeltaBetaGG"	 ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_dphiVG"	 ,    "RJVars_dphiVG"	         ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_P_0_CosTheta"	 ,    "RJVars_P_0_CosTheta"	 ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_C_0_CosTheta"   ,   "RJVars_C_0_CosTheta"   ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_P_0_dPhiGC"	,     "RJVars_P_0_dPhiGC"	,    100 , 0,2e6 )));
+  ATH_CHECK( book( TH1D("RJVars_DeltaBetaGG"	 ,    "RJVars_DeltaBetaGG"	 , 128, -3.2, 3.2 )));
+  ATH_CHECK( book( TH1D("RJVars_dphiVG"	 ,             "RJVars_dphiVG"	         , 128, -3.2, 3.2 )));
+  ATH_CHECK( book( TH1D("RJVars_P_0_CosTheta"	 ,    "RJVars_P_0_CosTheta"	 , 128, -3.2, 3.2 )));
+  ATH_CHECK( book( TH1D("RJVars_C_0_CosTheta"   ,   "RJVars_C_0_CosTheta"   , 128, -3.2, 3.2 )));
+  ATH_CHECK( book( TH1D("RJVars_P_0_dPhiGC"	,     "RJVars_P_0_dPhiGC"	, 128, -3.2, 3.2 )));
   ATH_CHECK( book( TH1D("RJVars_P_0_MassRatioGC",   "RJVars_P_0_MassRatioGC",    100 , 0,2e6 )));
   ATH_CHECK( book( TH1D("RJVars_P_0_Jet1_pT"	,     "RJVars_P_0_Jet1_pT"	,    100 , 0,2e6 )));
   ATH_CHECK( book( TH1D("RJVars_P_0_Jet2_pT"	,     "RJVars_P_0_Jet2_pT"	,    100 , 0,2e6 )));
   ATH_CHECK( book( TH1D("RJVars_P_0_PInvHS"      ,  "RJVars_P_0_PInvHS"      ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_P_1_CosTheta"    ,  "RJVars_P_1_CosTheta"    ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_C_1_CosTheta"	 ,    "RJVars_C_1_CosTheta"	 ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_P_1_dPhiGC"	 ,    "RJVars_P_1_dPhiGC"	 ,    100 , 0,2e6 )));
+  ATH_CHECK( book( TH1D("RJVars_P_1_CosTheta"    ,  "RJVars_P_1_CosTheta"    , 128, -3.2, 3.2 )));
+  ATH_CHECK( book( TH1D("RJVars_C_1_CosTheta"	 ,    "RJVars_C_1_CosTheta"	 , 128, -3.2, 3.2 )));
+  ATH_CHECK( book( TH1D("RJVars_P_1_dPhiGC"	 ,    "RJVars_P_1_dPhiGC"	 , 128, -3.2, 3.2 )));
   ATH_CHECK( book( TH1D("RJVars_P_1_MassRatioGC" ,  "RJVars_P_1_MassRatioGC" ,    100 , 0,2e6 )));
   ATH_CHECK( book( TH1D("RJVars_P_1_Jet1_pT",	      "RJVars_P_1_Jet1_pT",    100 , 0,2e6 )));
   ATH_CHECK( book( TH1D("RJVars_P_1_Jet2_pT",	      "RJVars_P_1_Jet2_pT",    100 , 0,2e6 )));
   ATH_CHECK( book( TH1D("RJVars_P_1_PInvHS" ,	      "RJVars_P_1_PInvHS" ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_QCD_dPhiR"  ,	      "RJVars_QCD_dPhiR"  ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_QCD_Rpt"    ,	      "RJVars_QCD_Rpt"    ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_QCD_Rmsib"  ,	      "RJVars_QCD_Rmsib"  ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_QCD_Rpsib"  ,	      "RJVars_QCD_Rpsib"  ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_QCD_Delta1" ,	      "RJVars_QCD_Delta1" ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_QCD_Delta2" ,       "RJVars_QCD_Delta2" ,    100 , 0,2e6 )));
-
+  ATH_CHECK( book( TH1D("RJVars_QCD_dPhiR"  ,	      "RJVars_QCD_dPhiR"  , 128, -3.2, 3.2 )));
+  ATH_CHECK( book( TH1D("RJVars_QCD_Rpt"    ,	      "RJVars_QCD_Rpt"    , 128, -3.2, 3.2 )));
+  ATH_CHECK( book( TH1D("RJVars_QCD_Rmsib"  ,	      "RJVars_QCD_Rmsib"  , 128, -3.2, 3.2 )));
+  ATH_CHECK( book( TH1D("RJVars_QCD_Rpsib"  ,	      "RJVars_QCD_Rpsib"  , 128, -3.2, 3.2 )));
+  ATH_CHECK( book( TH1D("RJVars_QCD_Delta1" ,	      "RJVars_QCD_Delta1" , 128, -3.2, 3.2 )));
+  ATH_CHECK( book( TH1D("RJVars_QCD_Delta2" ,       "RJVars_QCD_Delta2" , 128, -3.2, 3.2 )));
 
   hist("Photon_refpt")->Sumw2();
   hist("Photon_fspt")->Sumw2();
@@ -147,6 +147,47 @@ StatusCode PhotonTruthAlg::initialize()
   hist("Photon_dRjet")->Sumw2();
   hist("Photon_dPhiJet")->Sumw2();
   hist("Photon_dRjmin")->Sumw2();
+
+  hist("RJVars_PP_Mass"        )->Sumw2();
+  hist("RJVars_PP_InvGamma"	  )->Sumw2();
+  hist("RJVars_PP_dPhiBetaR"	  )->Sumw2();
+  hist("RJVars_PP_dPhiVis"	  )->Sumw2();
+  hist("RJVars_PP_CosTheta"	  )->Sumw2();
+  hist("RJVars_PP_dPhiDecayAngle")->Sumw2();
+  hist("RJVars_PP_VisShape"	  )->Sumw2();
+  hist("RJVars_PP_MDeltaR"	  )->Sumw2();
+  hist("RJVars_P1_Mass"	  )->Sumw2();
+  hist("RJVars_P1_CosTheta"	  )->Sumw2();
+  hist("RJVars_P2_Mass"          )->Sumw2();
+  hist("RJVars_P2_CosTheta"	  )->Sumw2();
+  hist("RJVars_I1_Depth"	  )->Sumw2();
+  hist("RJVars_I2_Depth"	  )->Sumw2();
+  hist("RJVars_V1_N"	  )->Sumw2();
+  hist("RJVars_V2_N"            )->Sumw2();
+  hist("RJVars_MG"		 )->Sumw2();
+  hist("RJVars_DeltaBetaGG"	 )->Sumw2();
+  hist("RJVars_dphiVG"	 )->Sumw2();
+  hist("RJVars_P_0_CosTheta"	 )->Sumw2();
+  hist("RJVars_C_0_CosTheta"   )->Sumw2();
+  hist("RJVars_P_0_dPhiGC"	)->Sumw2();
+  hist("RJVars_P_0_MassRatioGC")->Sumw2();
+  hist("RJVars_P_0_Jet1_pT"	)->Sumw2();
+  hist("RJVars_P_0_Jet2_pT"	)->Sumw2();
+  hist("RJVars_P_0_PInvHS"      )->Sumw2();
+  hist("RJVars_P_1_CosTheta"    )->Sumw2();
+  hist("RJVars_C_1_CosTheta"	 )->Sumw2();
+  hist("RJVars_P_1_dPhiGC"	 )->Sumw2();
+  hist("RJVars_P_1_MassRatioGC" )->Sumw2();
+  hist("RJVars_P_1_Jet1_pT")->Sumw2();
+  hist("RJVars_P_1_Jet2_pT")->Sumw2();
+  hist("RJVars_P_1_PInvHS" )->Sumw2();
+  hist("RJVars_QCD_dPhiR"  )->Sumw2();
+  hist("RJVars_QCD_Rpt"    )->Sumw2();
+  hist("RJVars_QCD_Rmsib"  )->Sumw2();
+  hist("RJVars_QCD_Rpsib"  )->Sumw2();
+  hist("RJVars_QCD_Delta1" )->Sumw2();
+  hist("RJVars_QCD_Delta2" )->Sumw2();
+
 
   return StatusCode::SUCCESS;
 }
@@ -238,8 +279,8 @@ StatusCode PhotonTruthAlg::execute()
   m_proxyUtils->CalculateRJigsawVariables(truth_jets_proxy,
 					 // truthmet->mpx(),
 					 // truthmet->mpy(),
-					  photon_lead->p4().Px() + truthmet->mpx() + 1,//todo remove!!!
-					  photon_lead->p4().Py() + truthmet->mpy() + 1,
+					  photon_lead->p4().Px() + truthmet->mpx() + TMath::Sign(1.,photon_lead->p4().Px() + truthmet->mpx()) ,//todo remove!!!
+					  photon_lead->p4().Py() + truthmet->mpy() + TMath::Sign(1.,photon_lead->p4().Py() + truthmet->mpy()),
 					  RJigsawVariables,
 					  m_jetRJcut
 					  );
