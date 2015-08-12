@@ -21,10 +21,7 @@ def studyPhotonTruth(localFileList = None) :
 
     from os import path
 
-    streamName = 'AnalysisHistoStream' + path.basename(localFileList[0])
-    fileName   = 'PhotonTruth.' + path.basename(localFileList[0].split(".")[2]) + '.root'
-
-    histoStream = MSMgr.NewRootStream( streamName, 'output/' + fileName )
+#    streamName = 'AnalysisHistoStream'# + path.basename(localFileList[0])
 
 # Set up default configurations
 

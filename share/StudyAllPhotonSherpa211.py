@@ -1,3 +1,9 @@
+import AthenaPoolCnvSvc.ReadAthenaPool
+from AthenaCommon.AthenaCommonFlags import athenaCommonFlags
+from AthenaCommon.AppMgr import ServiceMgr
+from AthenaCommon import CfgMgr
+from glob import glob
+
 from StudyPhotonTruthSherpa211 import *
 
 
@@ -27,7 +33,13 @@ for line in inputFile :
     print fileList
     studyPhotonTruth(fileList)
 
-streamName = 'AnalysisHistoStream'# + path.basename(localFileList[0])
+streamName = 'AnalysisHistoStream' # + path.basename(localFileList[0])
+fileName   = 'PhotonTruthTest.small.root'# + path.basename(localFileList[0].split(".")[2]) + '.root'
+from OutputStreamAthenaPool.MultipleStreamManager import MSMgr
+#histoStream = MSMgr.NewRootStream( streamName, 'output/' + fileName )
+histoStream = MSMgr.NewRootStream( streamName, 'output/' + fileName)
+
+theApp.EvtMax = 1000
 
 topSequence = AlgSequence()
 topSequence += CfgMgr.PhotonTruthAlg("Gamma_35_70",# + path.basename(localFileList[0]).replace(".", ""),
