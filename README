@@ -22,6 +22,7 @@ cmt make
 cd yourworkdir
 git clone https://github.com/rsmith54/PhotonTruthStudy
 cd PhotonTruthStudy/cmt
+git checkout feature/segfault
 cmt config
 cmt make
 cd ../share
