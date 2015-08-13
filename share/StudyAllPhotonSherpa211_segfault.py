@@ -8,7 +8,8 @@ import os
 
 from optparse import OptionParser
 
-filelist = ["/data/users/rsmith/mc15_13TeV.361041.Sherpa_CT10_SinglePhotonPt35_70_BFilter.merge.DAOD_TRUTH1.e3587_p2375/DAOD_TRUTH1.05969078._000010.pool.root.1"]
+filelist = ["/data/users/rsmith/mc15_13TeV.361060.Sherpa_CT10_SinglePhotonPt4000_CVetoBVeto.merge.DAOD_TRUTH1.e3587_p2375/DAOD_TRUTH1.05969136._000001.pool.root.1",
+]`
 ServiceMgr.EventSelector.InputCollections = filelist
 
 streamName = 'AnalysisHistoStream'
