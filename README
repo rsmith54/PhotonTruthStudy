@@ -4,6 +4,9 @@ Installation
 
 To reproduce the bug, do the following :
 
+It's just one file :
+
+download mc15_13TeV.361060.Sherpa_CT10_SinglePhotonPt4000_CVetoBVeto.merge.DAOD_TRUTH1.e3587_p2375
 
 cd yourworkdir
 setupATLAS
@@ -22,3 +25,8 @@ cd PhotonTruthStudy/cmt
 cmt config
 cmt make
 cd ../share
+
+edit StudyAllPhotonSherpa211_segfault.py
+Just change filelist to point to your local version of the file in the DS
+
+athena StudyAllPhotonSherpa211_segfault.py
