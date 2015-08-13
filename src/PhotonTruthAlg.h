@@ -64,18 +64,6 @@ class PhotonTruthAlg
   /// Default constructor:
   PhotonTruthAlg();
 
-  /// Containers
-
-  // void RJigsawInit();
-
-
-  // void CalculateRJigsawVariables(const std::vector<JetProxy>& jets,
-  // 				 Double_t metx,
-  // 				 Double_t mety,
-  // 				 std::map<TString,float>& RJigsawVariables,
-  // 				 Double_t jetPtCut=0.);
-
-
 };
 
 // I/O operators
