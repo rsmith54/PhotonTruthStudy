@@ -1,0 +1,24 @@
+------------
+Installation
+------------
+
+To reproduce the bug, do the following :
+
+
+cd yourworkdir
+setupATLAS
+asetup AthAnalysisBase,2.3.22,here
+
+git clone https://github.com/rsmith54/RestFramesCMT.git RestFrames
+cd RestFrames
+git checkout feature/compileInCmt
+cd cmt
+cmt config
+cmt make
+
+cd yourworkdir
+git clone https://github.com/rsmith54/PhotonTruthStudy
+cd PhotonTruthStudy/cmt
+cmt config
+cmt make
+cd ../share
