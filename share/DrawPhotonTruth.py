@@ -102,21 +102,21 @@ colours = {"LO" : ROOT.kRed,
 
 filein = {
 #    "LO":  ROOT.TFile("output/ZbosonTruthTest.small.root"),#.Sherpa145.root"),
-    "NLO": ROOT.TFile("output/user.rsmith.v3.hadd.Sherpa_CT10_Znunu.BFilter.merge.ZbosonTruthStudy.root"),
+    "LO": ROOT.TFile("output/user.rsmith.v3.Sherpa.hadd.BFilter.root"),
 }
 
 histnames = [
-"Zboson_refpt",
-"Zboson_fspt",
-"Zboson_refeta",
-"Zboson_fseta",
+# "Zboson_refpt",
+# "Zboson_fspt",
+# "Zboson_refeta",
+# "Zboson_fseta",
 "Jet_fspt",
 "Jet_fseta",
 "Jet1_fspt",
 "Jet1_fseta",
-"Zboson_dRjet",
-"Zboson_dPhiJet",
-"Zboson_dRjmin",
+# "Zboson_dRjet",
+# "Zboson_dPhiJet",
+# "Zboson_dRjmin",
 "Njet20",
 "Njet30",
 "Njet60",
@@ -170,7 +170,8 @@ leg.SetFillStyle(0)
 leg.SetBorderSize(0)
 #for order in ["LO","NLO"]:
 
-for order in ["NLO"]:
+#for order in ["NLO"]:
+for order in ["LO"]:
     hists[order] = {}
     fillcolor = 1;
     for plotdir in plotdirs :
@@ -192,6 +193,7 @@ for order in ["NLO"]:
         for histname in histnames:
             if not histname in stacks.keys():
                 stacks[histname] = ROOT.THStack("hs_"+histname,histname)
+            print histname
             hist = filein[order].Get(plotdir+"/"+histname)
             hist.Scale(normalisation)
             hist.SetLineColor(ROOT.kBlack)
@@ -202,14 +204,14 @@ for order in ["NLO"]:
             if len(hists[order])==1:
                 leg.AddEntry(hist,order,'f')
 
-c = ROOT.TCanvas("ztruth")
+c = ROOT.TCanvas("gammaTruth")
 c.SetLogy()
 for histname in histnames:
     c.SetLogx("pt" in histname)
     stacks[histname].Draw("hist")
     stacks[histname].SetMinimum(1e-1)
-    stacks[histname].SetMaximum(1e7)
+    stacks[histname].SetMaximum(1e4)
     stacks[histname].GetXaxis().SetTitle(histname)
     stacks[histname].GetYaxis().SetTitle("Events / {0} ifb".format(lumi))
     leg.Draw()
-    c.SaveAs("Zplots/"+histname+".eps")
+    c.SaveAs("Gammaplots/"+histname+".eps")
