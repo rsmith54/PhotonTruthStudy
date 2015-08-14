@@ -8,7 +8,7 @@ suffix = '{dd:02d}{mm:02d}{yy:02d}.{effort}'.format(dd=date.day,mm=date.month,yy
 #for sherpaversion in ["Sherpa145","Sherpa211"]:
 for sherpaversion in ["Sherpa211"]:
 
-    indatasets = dataset_lists['Zvv_'+sherpaversion]
+    indatasets = dataset_lists['Zvv_LO_'+sherpaversion]
     first = True
     for indataset in indatasets:
         indscomps = indataset.split(".")
@@ -21,7 +21,7 @@ for sherpaversion in ["Sherpa211"]:
         tmpdir = '/tmp/rsmith/'
         tarball = tmpdir+'ZbosonTruthStudy.'+suffix
 
-        outdataset = 'user.rsmith.v3withName.{dsid}.{shortname}.ZbosonTruthStudy.{suf}'.format(dsid=indscomps[2],shortname=indscomps[3],suf=suffix)
+        outdataset = 'user.rsmith.v3.{dsid}.{shortname}.ZbosonTruthStudy.{suf}'.format(dsid=indscomps[2],shortname=indscomps[3],suf=suffix)
         pathtemp = r'pathena --cmtConfig=x86_64-slc6-gcc48-opt --inDS={inds} --outDS={outds}  StudyAllZbosonSherpa211.py --outTarBall={tar} --mergeOutput'
         pathcmd = pathtemp.format(inds=indataset,outds=outdataset,tar=tarball,ver=sherpaversion)
 
