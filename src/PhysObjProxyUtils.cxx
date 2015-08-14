@@ -385,8 +385,8 @@ void PhysObjProxyUtils::CalculateRJigsawVariables(const std::vector<JetProxy>& j
   TVector3 MET_TV3;
 
   MET_TV3.SetZ(0.);
-  MET_TV3.SetX(metx+.01);
-  MET_TV3.SetY(mety+.01);
+  MET_TV3.SetX(metx);
+  MET_TV3.SetY(mety);
 
 
   // std::cout << "njets calc " << jetID_R.size() << std::endl;
