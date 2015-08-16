@@ -216,6 +216,8 @@ for order in ["LO"]:
 
 c = ROOT.TCanvas("ztruth")
 c.SetLogy()
+
+outfile = ROOT.TFile("output/outGammaStack.root", "RECREATE")
 #for order in ["LO","NLO"]:
 #for order in ["NLO"]:
 for order in ["LO"]:
@@ -227,4 +229,5 @@ for order in ["LO"]:
         stacks[order][histname].GetXaxis().SetTitle(histname)
         stacks[order][histname].GetYaxis().SetTitle("Events / {0} ifb".format(lumi))
         leg.Draw()
+        stacks[order][histname].Write()
         c.SaveAs("gammaPlots/"+histname+order+".eps")

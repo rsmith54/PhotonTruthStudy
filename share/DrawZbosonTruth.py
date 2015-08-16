@@ -188,6 +188,9 @@ for order in ["NLO"]:
 c = ROOT.TCanvas("ztruth")
 c.SetLogy()
 #for order in ["LO","NLO"]:
+outfile = ROOT.TFile("output/outZStack.root", "RECREATE")
+
+
 for order in ["NLO"]:
     for histname in histnames:
         c.SetLogx("pt" in histname)
@@ -197,4 +200,5 @@ for order in ["NLO"]:
         stacks[order][histname].GetXaxis().SetTitle(histname)
         stacks[order][histname].GetYaxis().SetTitle("Events / {0} ifb".format(lumi))
         leg.Draw()
+        stacks[order][histname].Write()
         c.SaveAs("Zplots/"+histname+order+".eps")
