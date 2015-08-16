@@ -22,7 +22,7 @@ for sherpaversion in ["Sherpa211"]:#,"Sherpa211"]:
         tmpdir = '/tmp/rsmith/'
         tarball = tmpdir+'PhotonTruthStudy.'+suffix
 
-        outdataset = 'user.rsmith.v3withName.{dsid}.{shortname}.PhotonTruthStudy.{suf}'.format(dsid=indscomps[1],shortname=indscomps[2],suf=suffix)
+        outdataset = 'user.rsmith.v3.noSegFault.{dsid}.{shortname}.PhotonTruthStudy.{suf}'.format(dsid=indscomps[1],shortname=indscomps[2],suf=suffix)
         pathtemp = r'pathena --inDS={inds} --outDS={outds} StudyAllPhotonSherpa211.py  --outTarBall={tar} --mergeOutput'
         pathcmd = pathtemp.format(inds=indataset,outds=outdataset,ver=sherpaversion,tar=tarball)
 
