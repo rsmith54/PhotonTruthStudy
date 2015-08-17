@@ -190,7 +190,7 @@ leg.SetBorderSize(0)
 #for order in ["NLO"] :
 for order in ["LO","NLO"]:
     for histname in histnames :
-        stacks[order][histname] = ROOT.THStack("hs_"+order+"_"+histname,order+histname)
+        stacks[order][histname] = ROOT.THStack("hs_"+order+"_"+histname,"hs_"+order+"_"+histname)
 
 fillcolor = 1;
 for order in ["LO","NLO"]:
