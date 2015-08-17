@@ -1,10 +1,54 @@
 import ROOT
 import AtlasStyle
 
+# 407163	Sherpa_CT10_Znunu_LO_Pt0_70_CVetoBVeto
+# 407164	Sherpa_CT10_Znunu_LO_Pt0_70_CFilterBVeto
+# 407165	Sherpa_CT10_Znunu_LO_Pt0_70_BFilter
+# 407166	Sherpa_CT10_Znunu_LO_Pt70_140_CVetoBVeto
+# 407167	Sherpa_CT10_Znunu_LO_Pt70_140_CFilterBVeto
+# 407168	Sherpa_CT10_Znunu_LO_Pt70_140_BFilter
+# 407169	Sherpa_CT10_Znunu_LO_Pt140_280_CVetoBVeto
+# 407170	Sherpa_CT10_Znunu_LO_Pt140_280_CFilterBVeto
+# 407171	Sherpa_CT10_Znunu_LO_Pt140_280_BFilter
+# 407172	Sherpa_CT10_Znunu_LO_Pt280_500_CVetoBVeto
+# 407173	Sherpa_CT10_Znunu_LO_Pt280_500_CFilterBVeto
+# 407174	Sherpa_CT10_Znunu_LO_Pt280_500_BFilter
+# 407175	Sherpa_CT10_Znunu_LO_Pt500_700_CVetoBVeto
+# 407176	Sherpa_CT10_Znunu_LO_Pt500_700_CFilterBVeto
+# 407177	Sherpa_CT10_Znunu_LO_Pt500_700_BFilter
+# 407178	Sherpa_CT10_Znunu_LO_Pt700_1000_CVetoBVeto
+# 407179	Sherpa_CT10_Znunu_LO_Pt700_1000_CFilterBVeto
+# 407180	Sherpa_CT10_Znunu_LO_Pt700_1000_BFilter
+# 407181	Sherpa_CT10_Znunu_LO_Pt1000_E_CMS_CVetoBVeto
+# 407182	Sherpa_CT10_Znunu_LO_Pt1000_E_CMS_CFilterBVeto
+# 407183	Sherpa_CT10_Znunu_LO_Pt1000_E_CMS_BFilter
+
 xsecs = {"LO"  : {
-        "CVetoBVeto"   : {},
-        "CFilterBVeto" : {},
-        "BFilter"      : {},
+        "CVetoBVeto"   : {"ZPt0"    : 10919.0	*0.999323*	0.76938,
+                          "ZPt70"   : 378.85	*0.999323*	0.63549,
+                          "ZPt140"  : 59.975	*0.999323*	0.61413,
+                          "ZPt280"  : 4.3501	*0.999323*	0.59165,
+                          "ZPt500"  : 0.26869	*0.999323*	0.57394,
+                          "ZPt700"  : 0.048148	*0.999323*	0.56094,
+                          "ZPt1000" : 0.0064279	*0.999323*	0.55025,
+#                          "Apt2000" :
+                              },
+        "CFilterBVeto" : {"ZPt0"    : 10918.0	*0.999323*	0.14136,
+                          "ZPt70"   : 379.03	*0.999323*	0.22287,
+                          "ZPt140"  : 60.035	*0.999323*	0.23972,
+                          "ZPt280"  : 4.3551	*0.999323*	0.25615,
+                          "ZPt500"  : 0.26856	*0.999323*	0.26931,
+                          "ZPt700"  : 0.048059	*0.999323*	0.27855,
+                          "ZPt1000" : 0.006413	*0.999323*	0.28639,
+                          },
+        "BFilter"      : {"ZPt0"    : 10919.0	*0.999323*	0.08829 ,
+                          "ZPt70"   : 378.98	*0.999323*	0.14063 ,
+                          "ZPt140"  : 60.04	*0.999323*	0.14611 ,
+                          "ZPt280"  : 4.3544	*0.999323*	0.1522  ,
+                          "ZPt500"  : 0.2686	*0.999323*	0.15704 ,
+                          "ZPt700"  : 0.048164	*0.999323*	0.16028 ,
+                          "ZPt1000" : 0.0064412	*0.999323*	0.16369 ,
+                          },
         },
          "NLO" : {
         "CVetoBVeto"   : {"ZPt0"    :         0.778461 	*0.90105*	    11937.	,
@@ -50,7 +94,7 @@ plotdirs = [
     "ZPt500",
     "ZPt700",
     "ZPt1000",
-    "ZPt2000",
+#    "ZPt2000",
 #    "ZPt4000",
 ]
 
@@ -67,7 +111,10 @@ colours = {"LO" : ROOT.kRed,
 }
 
 filein = {
-    "LO":  {},#ROOT.TFile("output/ZbosonTruthTest.small.root"),#.Sherpa145.root"),
+    "LO":  {"CVetoBVeto"   :ROOT.TFile("output/user.rsmith.v3.Sherpa_CT10_Znunu_LO.hadd.CVetoBVeto.root"  ),
+            "CFilterBVeto" :ROOT.TFile("output/user.rsmith.v3.Sherpa_CT10_Znunu_LO.hadd.CFilterBVeto.root"),
+            "BFilter"      :ROOT.TFile("output/user.rsmith.v3.Sherpa_CT10_Znunu_LO.hadd.BFilter.root"     ),
+            },
     "NLO": {"CVetoBVeto"   :ROOT.TFile("output/user.rsmith.v3.Sherpa_CT10_Znunu_NLO.hadd.CVetoBVeto.root"  ),
             "CFilterBVeto" :ROOT.TFile("output/user.rsmith.v3.Sherpa_CT10_Znunu_NLO.hadd.CFilterBVeto.root"),
             "BFilter"      :ROOT.TFile("output/user.rsmith.v3.Sherpa_CT10_Znunu_NLO.hadd.BFilter.root"     ),
@@ -140,13 +187,14 @@ leg = ROOT.TLegend(0.7,0.7,0.9,0.9)
 leg.SetFillStyle(0)
 leg.SetBorderSize(0)
 
-for order in ["NLO"] :
-#for order in ["LO","NLO"]:
+#for order in ["NLO"] :
+for order in ["LO","NLO"]:
     for histname in histnames :
-        stacks[order][histname] = ROOT.THStack("hs_"+order+histname,order+histname)
+        stacks[order][histname] = ROOT.THStack("hs_"+order+"_"+histname,order+histname)
 
 fillcolor = 1;
-for order in ["NLO"]:
+for order in ["LO","NLO"]:
+#for order in ["NLO"]:
     hists[order] = {}
 
     for bfilt in bfilts :
@@ -190,8 +238,8 @@ c.SetLogy()
 #for order in ["LO","NLO"]:
 outfile = ROOT.TFile("output/outZStack.root", "RECREATE")
 
-
-for order in ["NLO"]:
+for order in ["LO","NLO"]:
+#for order in ["NLO"]:
     for histname in histnames:
         c.SetLogx("pt" in histname)
         stacks[order][histname].Draw("hist")
