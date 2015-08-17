@@ -284,12 +284,6 @@ StatusCode ZbosonTruthAlg::execute()
   std::vector<JetProxy> truth_jets_proxy;
 
   for(const auto&  jet : *truthJets) {
-    JetProxy const jetproxy(jet->p4(),
-			    true,
-			    false,
-			    true,
-			    true);
-    truth_jets_proxy.push_back(jetproxy);
 
     float dR = zboson_ref.DeltaR(jet->p4());
     if(dR<0.2) continue;
@@ -297,6 +291,14 @@ StatusCode ZbosonTruthAlg::execute()
       if(!jet_lead || jet->pt()>jet_lead->pt()) {
 	jet_lead = jet;
       }
+
+      JetProxy const jetproxy(jet->p4(),
+			      true,
+			      false,
+			      true,
+			      true);
+      truth_jets_proxy.push_back(jetproxy);
+
       hist("Jet_fspt")->Fill(jet->pt()/1e3,weight);
       hist("Jet_fseta")->Fill(jet->eta(),weight);
       if(dR<dRmin) dRmin = dR;
