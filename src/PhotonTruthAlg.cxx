@@ -93,7 +93,7 @@ StatusCode PhotonTruthAlg::initialize()
 
 
   ATH_CHECK( book( TH1D("RJVars_PP_Mass"        ,     "RJVars_PP_Mass"            ,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_PP_InvGamma"	  ,   "RJVars_PP_InvGamma"	  ,    100 , 0,2e6 )));
+  ATH_CHECK( book( TH1D("RJVars_PP_InvGamma"	  ,   "RJVars_PP_InvGamma"	  ,    100 , -.5, 1.5 )));
   ATH_CHECK( book( TH1D("RJVars_PP_dPhiBetaR"	  ,   "RJVars_PP_dPhiBetaR"	  , 128, -3.2, 3.2 )));
   ATH_CHECK( book( TH1D("RJVars_PP_dPhiVis"	  ,   "RJVars_PP_dPhiVis"	  , 128, -3.2, 3.2 )));
   ATH_CHECK( book( TH1D("RJVars_PP_CosTheta"	  ,   "RJVars_PP_CosTheta"	  , 128, -3.2, 3.2 )));
@@ -114,17 +114,17 @@ StatusCode PhotonTruthAlg::initialize()
   ATH_CHECK( book( TH1D("RJVars_P_0_CosTheta"	 ,    "RJVars_P_0_CosTheta"	 , 128, -3.2, 3.2 )));
   ATH_CHECK( book( TH1D("RJVars_C_0_CosTheta"   ,   "RJVars_C_0_CosTheta"   , 128, -3.2, 3.2 )));
   ATH_CHECK( book( TH1D("RJVars_P_0_dPhiGC"	,     "RJVars_P_0_dPhiGC"	, 128, -3.2, 3.2 )));
-  ATH_CHECK( book( TH1D("RJVars_P_0_MassRatioGC",   "RJVars_P_0_MassRatioGC",    100 , 0,2e6 )));
+  ATH_CHECK( book( TH1D("RJVars_P_0_MassRatioGC",   "RJVars_P_0_MassRatioGC",    100 , -.5, 1.5)));
   ATH_CHECK( book( TH1D("RJVars_P_0_Jet1_pT"	,     "RJVars_P_0_Jet1_pT"	,    100 , 0,2e6 )));
   ATH_CHECK( book( TH1D("RJVars_P_0_Jet2_pT"	,     "RJVars_P_0_Jet2_pT"	,    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_P_0_PInvHS"      ,  "RJVars_P_0_PInvHS"      ,    100 , 0,2e6 )));
+  ATH_CHECK( book( TH1D("RJVars_P_0_PInvHS"      ,  "RJVars_P_0_PInvHS"      ,    100 , -.5, 1.5 )));
   ATH_CHECK( book( TH1D("RJVars_P_1_CosTheta"    ,  "RJVars_P_1_CosTheta"    , 128, -3.2, 3.2 )));
   ATH_CHECK( book( TH1D("RJVars_C_1_CosTheta"	 ,    "RJVars_C_1_CosTheta"	 , 128, -3.2, 3.2 )));
   ATH_CHECK( book( TH1D("RJVars_P_1_dPhiGC"	 ,    "RJVars_P_1_dPhiGC"	 , 128, -3.2, 3.2 )));
-  ATH_CHECK( book( TH1D("RJVars_P_1_MassRatioGC" ,  "RJVars_P_1_MassRatioGC" ,    100 , 0,2e6 )));
+  ATH_CHECK( book( TH1D("RJVars_P_1_MassRatioGC" ,  "RJVars_P_1_MassRatioGC" ,    100 , -.5, 1.5 )));
   ATH_CHECK( book( TH1D("RJVars_P_1_Jet1_pT",	      "RJVars_P_1_Jet1_pT",    100 , 0,2e6 )));
   ATH_CHECK( book( TH1D("RJVars_P_1_Jet2_pT",	      "RJVars_P_1_Jet2_pT",    100 , 0,2e6 )));
-  ATH_CHECK( book( TH1D("RJVars_P_1_PInvHS" ,	      "RJVars_P_1_PInvHS" ,    100 , 0,2e6 )));
+  ATH_CHECK( book( TH1D("RJVars_P_1_PInvHS" ,	      "RJVars_P_1_PInvHS" ,    100 , -.5, 1.5 )));
   ATH_CHECK( book( TH1D("RJVars_QCD_dPhiR"  ,	      "RJVars_QCD_dPhiR"  , 128, -3.2, 3.2 )));
   ATH_CHECK( book( TH1D("RJVars_QCD_Rpt"    ,	      "RJVars_QCD_Rpt"    , 128, -3.2, 3.2 )));
   ATH_CHECK( book( TH1D("RJVars_QCD_Rmsib"  ,	      "RJVars_QCD_Rmsib"  , 128, -3.2, 3.2 )));
