@@ -38,7 +38,7 @@ xsecs = {"LO"  : {
                         'GammaPt4000' : 0.0000000024843*0.40351,
                         },
         "CFilterBVeto" : {'GammaPt35' :   34986. *0.48610,
-                          'GammaPt70' :   31329.9*0.48201,
+                          'GammaPt70' :   3132.9 *0.48201,
                           'GammaPt140' :  247.39 *0.47826,
                           'GammaPt280' :  13.617 * .47349,
                           'GammaPt500' :  .92185 * .47149,
@@ -69,11 +69,11 @@ plotdirs = [
 'GammaPt35',
 'GammaPt70',
 'GammaPt140',
-# 'GammaPt280',
-# 'GammaPt500',
-# 'GammaPt1000',
-# 'GammaPt2000',
-# 'GammaPt4000',
+'GammaPt280',
+'GammaPt500',
+'GammaPt1000',
+'GammaPt2000',
+'GammaPt4000',
 ]
 
 # xsecs = {"LO":    10471000.,
@@ -102,17 +102,17 @@ filein = {
 }
 
 histnames = [
-#"Zboson_refpt",
-#"Zboson_fspt",
-#"Zboson_refeta",
-#"Zboson_fseta",
+"Photon_refpt",
+"Photon_fspt",
+"Photon_refeta",
+"Photon_fseta",
 "Jet_fspt",
 "Jet_fseta",
 "Jet1_fspt",
 "Jet1_fseta",
-#"Zboson_dRjet",
-#"Zboson_dPhiJet",
-#"Zboson_dRjmin",
+"Photon_dRjet",
+"Photon_dPhiJet",
+"Photon_dRjmin",
 "Njet20",
 "Njet30",
 "Njet60",
@@ -200,11 +200,11 @@ for order in ["LO"]:
 
             for histname in histnames:
 #                if not histname in stacks.keys():
-                print "histname : " + histname
+#                print "histname : " + histname
                 hist = filein[order][bfilt].Get(plotdir+"/"+histname)
                 hist.Scale(normalisation)
                 hist.SetLineColor(ROOT.kBlack)
-                print "hist getEntries : " + str(hist.GetEntries())
+                #                print "hist getEntries : " + str(hist.GetEntries())
                 #            hist.SetFillColor(colours[order])
                 hist.SetFillColor(fillcolor)
                 myclone = hist.Clone()

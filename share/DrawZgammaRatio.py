@@ -33,6 +33,9 @@ c1 = ROOT.TCanvas("ratio")
 
 print intersect(filteredListGamma,filteredListZboson)
 
+ROOT.gStyle.SetOptStat(0)
+
+
 for stackname in intersect(filteredListGamma,filteredListZboson) :
 
     print "stack object name : " + stackname
@@ -58,6 +61,9 @@ for stackname in intersect(filteredListGamma,filteredListZboson) :
     histGamma .Sumw2()
     histZboson.Sumw2()
 
+    histGamma.Rebin(4)
+    histZboson.Rebin(4)
+
     histGammaScale  = 1.#./histGamma .Integral()
     histZbosonScale = 1.#./histZboson.Integral()
 
@@ -67,7 +73,8 @@ for stackname in intersect(filteredListGamma,filteredListZboson) :
 
     histZboson.Draw("E")
     histZboson.SetMinimum(0.)
-    histZboson.SetMaximum(5.)
+    histZboson.SetMaximum(2.)
+    histZboson.GetXaxis().SetTitle(stackZboson.GetName())
     histZboson.GetYaxis().SetTitle("Z / gamma ")
 
 
