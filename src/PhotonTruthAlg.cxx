@@ -247,6 +247,12 @@ StatusCode PhotonTruthAlg::execute()
 
 
   for(const auto&  jet : *truthJets) {
+    float dR = photon_lead->p4().DeltaR(jet->p4());
+    if(dR<0.2) continue;
+    if(jet->pt()>10e3) {
+      if(!jet_lead || jet->pt()>jet_lead->pt()) {
+	jet_lead = jet;
+      }
 
     JetProxy const jetproxy(jet->p4(),
 			    true,
@@ -255,12 +261,8 @@ StatusCode PhotonTruthAlg::execute()
 			    true);
     truth_jets_proxy.push_back(jetproxy);
 
-    float dR = photon_lead->p4().DeltaR(jet->p4());
-    if(dR<0.2) continue;
-    if(jet->pt()>10e3) {
-      if(!jet_lead || jet->pt()>jet_lead->pt()) {
-	jet_lead = jet;
-      }
+
+
       hist("Jet_fspt")->Fill(jet->pt()/1e3,weight);
       hist("Jet_fseta")->Fill(jet->eta(),weight);
       if(dR<dRmin) dRmin = dR;

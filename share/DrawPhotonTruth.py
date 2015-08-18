@@ -1,9 +1,6 @@
 import ROOT
 import AtlasStyle
 
-xsecs = {}
-
-
 # 361039	Sherpa_CT10_SinglePhotonPt35_70_CVetoBVeto		34988.		1.	0.41028	1.
 # 361040	Sherpa_CT10_SinglePhotonPt35_70_CFilterBVeto		34986.		1.	0.48610	1.
 # 361041	Sherpa_CT10_SinglePhotonPt35_70_BFilter			35002.		1.	0.10372	1.
@@ -29,53 +26,44 @@ xsecs = {}
 # 361061	Sherpa_CT10_SinglePhotonPt4000_CFilterBVeto		0.0000000025134	1.	0.41612	1.
 # 361062	Sherpa_CT10_SinglePhotonPt4000_BFilter			0.0000000025431	1.	0.14831	1.
 
-xsecs["LO"] = {
-'GammaPt35' :      35002. * 0.10372,
-'GammaPt70' :      3135.2 * 0.11728,
-'GammaPt140' :     249.37 * 0.12874,
-'GammaPt280' :     13.874 * 0.14065,
-'GammaPt500' :     .93819 * 0.14811,
-'GammaPt1000' :    .019046* 0.15750,
-'GammaPt2000' :    0.000082153 * 0.16548,
-'GammaPt4000' :    0.0000000025431* 0.14831,
-}                           #filt eff     kfact              xsec
-# xsecs["NLO"]= {"ZPt0_70_CVetoBVeto" :        0.778461 	*0.90105*	    11937.	,
-#                "ZPt0_70_CFilterBVeto" :      0.140128 	*0.90105*	    11933.	,
-#                "ZPt0_70_BFilter" :           0.080032 	*0.90105*	    11949.	,
-#                "ZPt70_140_CVetoBVeto" :      0.649624 	*0.90105*	    428.25	,
-#                "ZPt70_140_CFilterBVeto" :    0.218402 	*0.90105*	    427.67	,
-#                "ZPt70_140_BFilter" :         0.132849 	*0.90105*	    428.59	,
-#                "ZPt140_280_CVetoBVeto" :     0.613840 	*0.90105*	    65.902	,
-#                "ZPt140_280_CFilterBVeto" :   0.239057 	*0.90105*	    65.796	,
-#                "ZPt140_280_BFilter" :        0.147665 	*0.90105*	    66.149	,
-#                "ZPt280_500_CVetoBVeto" :     0.585661 	*0.90105*	    4.8378	,
-#                "ZPt280_500_CFilterBVeto" :   0.260628 	*0.90105*	    4.8408	,
-#                "ZPt280_500_BFilter" :        0.161749 	*0.90105*	    4.8839	,
-#                "ZPt500_700_CVetoBVeto" :     0.555049 	*0.90105*	    0.29329,
-#                "ZPt500_700_CFilterBVeto" :   0.274948 	*0.90105*	    0.30096,
-#                "ZPt500_700_BFilter" :        0.164931 	*0.90105*	    0.30345,
-#                "ZPt700_1000_CVetoBVeto" :    0.557693    *0.90105*	    0.053341	,
-#                "ZPt700_1000_CFilterBVeto" :  0.303868    *0.90105*	    0.054118	,
-#                "ZPt700_1000_BFilter" :       0.163096    *0.90105*	    0.056399	,
-#                "ZPt1000_2000_CVetoBVeto" :   0.534707 *   0.90105*	    0.0076507	,
-#                "ZPt1000_2000_CFilterBVeto" : 0.312154 *   0.90105*	    0.0084891	,
-#                "ZPt1000_2000_BFilter" :      0.197191 *   0.90105*	    0.0078858	,
-#                "ZPt2000_E_CMS_CVetoBVeto" :  0.543622 *   0.90105*	    0.000034976	,
-#                "ZPt2000_E_CMS_CFilterBVeto" :0.345637 *  0.90105*	    0.000021126	,
-#                "ZPt2000_E_CMS_BFilter" :     0.215729 *   0.90105*	    0.000032459	,
-# }
 
-# xsecs["NLO"]= {"ZPt0"    :        0.080032 	*0.90105*	    11949.	,
-#                "ZPt70"   :        0.132849 	*0.90105*	    428.59	,
-#                "ZPt140"  :        0.147665 	*0.90105*	    66.149	,
-#                "ZPt280"  :        0.161749 	*0.90105*	    4.8839	,
-#                "ZPt500"  :        0.164931 	*0.90105*	    0.30345,
-#                "ZPt700"  :        0.163096    *0.90105*	    0.056399	,
-#                "ZPt1000" :        0.197191 *   0.90105*	    0.0078858	,
-#                "ZPt2000" :        0.215729 *   0.90105*	    0.000032459	,
-# }
+xsecs = {"LO"  : {
+        "CVetoBVeto" : {'GammaPt35'  :  34988.* 0.41028 ,
+                        'GammaPt70'  :  3129. * 0.39960 ,
+                        'GammaPt140' :  247.41* 0.39265 ,
+                        'GammaPt280' :  13.648* 0.38607 ,
+                        'GammaPt500' :  0.92334*0.37922 ,
+                        'GammaPt1000' : 0.018432*0.37058,
+                        'GammaPt2000' : 0.000079163*0.38039,
+                        'GammaPt4000' : 0.0000000024843*0.40351,
+                        },
+        "CFilterBVeto" : {'GammaPt35' :   34986. *0.48610,
+                          'GammaPt70' :   3132.9 *0.48201,
+                          'GammaPt140' :  247.39 *0.47826,
+                          'GammaPt280' :  13.617 * .47349,
+                          'GammaPt500' :  .92185 * .47149,
+                          'GammaPt1000' : .018388* .46648,
+                          'GammaPt2000' : .00008515*.45148,
+                          'GammaPt4000' : 0.0000000025134*0.41612,
 
+            },
+        "BFilter"   : {'GammaPt35' :   35002. * 0.10372,
+                       'GammaPt70' :   3135.2 * 0.11728,
+                       'GammaPt140' :  249.37 * 0.12874,
+                       'GammaPt280' :  13.874 * 0.14065,
+                       'GammaPt500' :  .93819 * 0.14811,
+                       'GammaPt1000' : .019046* 0.15750,
+                       'GammaPt2000' : 0.000082153 * 0.16548,
+                       'GammaPt4000' : 0.0000000025431* 0.14831,
+                       },
+        },
+        "NLO" : {},
+         }#xsec dict
 
+bfilts = ["CVetoBVeto",
+          "CFilterBVeto",
+          "BFilter",
+          ]
 
 plotdirs = [
 'GammaPt35',
@@ -101,22 +89,30 @@ colours = {"LO" : ROOT.kRed,
 }
 
 filein = {
-#    "LO":  ROOT.TFile("output/ZbosonTruthTest.small.root"),#.Sherpa145.root"),
-    "LO": ROOT.TFile("output/user.rsmith.v3.Sherpa.hadd.BFilter.root"),
+    "LO":  {"CVetoBVeto"   :ROOT.TFile("output/user.rsmith.v3.noSegFault.Sherpa_CT10_SinglePhoton_LO.hadd.CVetoBVeto.root"),
+            "CFilterBVeto" :ROOT.TFile("output/user.rsmith.v3.noSegFault.Sherpa_CT10_SinglePhoton_LO.hadd.CFilterBVeto.root"),
+            "BFilter"      :ROOT.TFile("output/user.rsmith.v3.noSegFault.Sherpa_CT10_SinglePhoton_LO.hadd.BFilter.root"),
+
+
+},#ROOT.TFile("output/ZbosonTruthTest.small.root"),#.Sherpa145.root"),
+    "NLO": {#"CVetoBVeto"   :ROOT.TFile("output/user.rsmith.v3.Sherpa_CT10_Znunu_NLO.hadd.CVetoBVeto.root"  ),
+            #"CFilterBVeto" :ROOT.TFile("output/user.rsmith.v3.Sherpa_CT10_Znunu_NLO.hadd.CFilterBVeto.root"),
+            #"BFilter"      :ROOT.TFile("output/user.rsmith.v3.Sherpa_CT10_Znunu_NLO.hadd.BFilter.root"     ),
+            }
 }
 
 histnames = [
-# "Zboson_refpt",
-# "Zboson_fspt",
-# "Zboson_refeta",
-# "Zboson_fseta",
+"Photon_refpt",
+"Photon_fspt",
+"Photon_refeta",
+"Photon_fseta",
 "Jet_fspt",
 "Jet_fseta",
 "Jet1_fspt",
 "Jet1_fseta",
-# "Zboson_dRjet",
-# "Zboson_dPhiJet",
-# "Zboson_dRjmin",
+"Photon_dRjet",
+"Photon_dPhiJet",
+"Photon_dRjmin",
 "Njet20",
 "Njet30",
 "Njet60",
@@ -164,54 +160,74 @@ histnames = [
 hists = {}
 #normalisation = {}
 lumi = 1
-stacks = {}
+stacks = {"LO" :{},
+          "NLO":{},
+          }
 leg = ROOT.TLegend(0.7,0.7,0.9,0.9)
 leg.SetFillStyle(0)
 leg.SetBorderSize(0)
-#for order in ["LO","NLO"]:
 
+#for order in ["NLO"] :
+for order in ["LO"] :
+#for order in ["LO","NLO"]:
+    for histname in histnames :
+        stacks[order][histname] = ROOT.THStack("hs_"+order+"_"+histname,"hs_"+order+"_"+histname)
+
+fillcolor = 1;
+for order in ["LO"]:
+#for order in ["NLO"]:
+    hists[order] = {}
+
+    for bfilt in bfilts :
+        hists[order][bfilt] = {}
+        for plotdir in plotdirs :
+            fillcolor = fillcolor + 1
+            if fillcolor > 9 : fillcolor = 2
+            hists[order][bfilt][plotdir] = {}
+        #        plotdir = "ZPt500"
+            print "filein " + filein[order][bfilt].GetName()
+            evtsprocessed = filein[order][bfilt].Get(plotdir+"/EvtsProcessed")
+        #    evtsprocessed = 1000
+            print "plotdir   : " + str( plotdir)
+            print "lumi      : " + str( lumi   )
+            print "nevnts    : " + str( evtsprocessed.GetBinContent(1))
+            print "sumweight : " + str( evtsprocessed.GetBinContent(2))
+            print "xsec      : " + str( xsecs[order][bfilt][plotdir])
+            if(evtsprocessed.GetBinContent(2) < 1) : continue
+        #        normalisation[order] = lumi/evtsprocessed.GetBinContent(2)*xsecs[order]*filteff[order]
+            normalisation = lumi/evtsprocessed.GetBinContent(2)*xsecs[order][bfilt][plotdir]#*filteff[order][plotdir]
+            print "normalisation : " + str(normalisation)
+
+            for histname in histnames:
+#                if not histname in stacks.keys():
+#                print "histname : " + histname
+                hist = filein[order][bfilt].Get(plotdir+"/"+histname)
+                hist.Scale(normalisation)
+                hist.SetLineColor(ROOT.kBlack)
+                #                print "hist getEntries : " + str(hist.GetEntries())
+                #            hist.SetFillColor(colours[order])
+                hist.SetFillColor(fillcolor)
+                myclone = hist.Clone()
+                stacks[order][histname].Add(myclone)
+                hists[order][bfilt][plotdir][histname] = myclone
+                if len(hists[order])==1:
+                    leg.AddEntry(myclone,order+bfilt+plotdir,'f')
+
+
+c = ROOT.TCanvas("ztruth")
+c.SetLogy()
+
+outfile = ROOT.TFile("output/outGammaStack.root", "RECREATE")
+#for order in ["LO","NLO"]:
 #for order in ["NLO"]:
 for order in ["LO"]:
-    hists[order] = {}
-    fillcolor = 1;
-    for plotdir in plotdirs :
-        fillcolor = fillcolor + 1
-        hists[order][plotdir] = {}
-#        plotdir = "ZPt500"
-        evtsprocessed = filein[order].Get(plotdir+"/EvtsProcessed")
-    #    evtsprocessed = 1000
-        print "plotdir   : " + str( plotdir)
-        print "lumi      : " + str( lumi   )
-        print "nevnts    : " + str( evtsprocessed.GetBinContent(1))
-        print "sumweight : " + str( evtsprocessed.GetBinContent(2))
-        print "xsec      : " + str( xsecs[order][plotdir])
-        if(evtsprocessed.GetBinContent(2) < 1) : continue
-#        normalisation[order] = lumi/evtsprocessed.GetBinContent(2)*xsecs[order]*filteff[order]
-        normalisation = lumi/evtsprocessed.GetBinContent(2)*xsecs[order][plotdir]#*filteff[order][plotdir]
-
-
-        for histname in histnames:
-            if not histname in stacks.keys():
-                stacks[histname] = ROOT.THStack("hs_"+histname,histname)
-            print histname
-            hist = filein[order].Get(plotdir+"/"+histname)
-            hist.Scale(normalisation)
-            hist.SetLineColor(ROOT.kBlack)
-#            hist.SetFillColor(colours[order])
-            hist.SetFillColor(fillcolor)
-            stacks[histname].Add(hist)
-            hists[order][plotdir][histname] = hist
-            if len(hists[order])==1:
-                leg.AddEntry(hist,order,'f')
-
-c = ROOT.TCanvas("gammaTruth")
-c.SetLogy()
-for histname in histnames:
-    c.SetLogx("pt" in histname)
-    stacks[histname].Draw("hist")
-    stacks[histname].SetMinimum(1e-1)
-    stacks[histname].SetMaximum(1e4)
-    stacks[histname].GetXaxis().SetTitle(histname)
-    stacks[histname].GetYaxis().SetTitle("Events / {0} ifb".format(lumi))
-    leg.Draw()
-    c.SaveAs("Gammaplots/"+histname+".eps")
+    for histname in histnames:
+        c.SetLogx("pt" in histname)
+        stacks[order][histname].Draw("hist")
+        stacks[order][histname].SetMinimum(1e-1)
+        stacks[order][histname].SetMaximum(1e4)
+        stacks[order][histname].GetXaxis().SetTitle(histname)
+        stacks[order][histname].GetYaxis().SetTitle("Events / {0} ifb".format(lumi))
+        leg.Draw()
+        stacks[order][histname].Write()
+        c.SaveAs("gammaPlots/"+histname+order+".eps")
