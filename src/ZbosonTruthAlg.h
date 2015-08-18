@@ -56,6 +56,7 @@ class ZbosonTruthAlg
   float m_refz_ptmin;
   float	m_refz_ptmax;
   float m_jetRJcut;
+  float m_mDeltaRPreselection;
 
   PhysObjProxyUtils * m_proxyUtils;
 

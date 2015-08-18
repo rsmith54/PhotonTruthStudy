@@ -41,7 +41,7 @@ PhotonTruthAlg::PhotonTruthAlg( const std::string& name,
   declareProperty( "PhotonRef_PtMin", m_refy_ptmin=0 );
   declareProperty( "PhotonRef_PtMax", m_refy_ptmax=1e9 );
   declareProperty( "JetRJCut", m_jetRJcut=30000. );
-
+  declareProperty( "mDeltaRPreselection", m_deltaRPreselection=300000. );
 }
 
 // Destructor
@@ -229,11 +229,8 @@ StatusCode PhotonTruthAlg::execute()
 
   const xAOD::EventInfo* eventInfo(0);
   ATH_CHECK( evtStore()->retrieve(eventInfo) );
-  double weight=1;
+  double  weight=1;
   weight *= eventInfo->mcEventWeight();
-
-  hist("EvtsProcessed")->Fill("NEvents",1);
-  hist("EvtsProcessed")->Fill("SumWeights",weight);
 
   const MissingETContainer* met_truth(0);
   ATH_CHECK( evtStore()->retrieve(met_truth,"MET_Truth") );
@@ -284,6 +281,16 @@ StatusCode PhotonTruthAlg::execute()
 					  RJigsawVariables,
 					  m_jetRJcut
 					  );
+
+  //preselection
+
+  if(RJigsawVariables["RJVars_PP_MDeltaR"] < m_deltaRPreselection){
+    return StatusCode::SUCCESS;
+  }
+
+  hist("EvtsProcessed")->Fill("NEvents",1);
+  hist("EvtsProcessed")->Fill("SumWeights",weight);
+
 
   hist("Photon_refpt")->Fill(photon_ref->pt()/1e3,weight);
   hist("Photon_fspt")->Fill(photon_lead->pt()/1e3,weight);
