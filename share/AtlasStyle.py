@@ -1,3 +1,3 @@
-from ROOT import *
-ROOT.gROOT.LoadMacro("AtlasStyle.C") 
+import ROOT
+ROOT.gROOT.LoadMacro("AtlasStyle.C")
 #SetAtlasStyle()
