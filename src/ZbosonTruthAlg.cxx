@@ -42,7 +42,7 @@ ZbosonTruthAlg::ZbosonTruthAlg( const std::string& name,
   declareProperty( "ZbosonRef_PtMin", m_refz_ptmin=0 );
   declareProperty( "ZbosonRef_PtMax", m_refz_ptmax=1e9 );
   declareProperty( "JetRJCut", m_jetRJcut=30000. );
-  declareProperty( "mDeltaRPreselection", m_deltaRPreselection=300000. );
+  declareProperty( "mDeltaRPreselection", m_mDeltaRPreselection=300000. );
 }
 
 // Destructor
@@ -316,7 +316,7 @@ StatusCode ZbosonTruthAlg::execute()
 					  m_jetRJcut
 					  );
 
-  if(RJigsawVariables["RJVars_PP_MDeltaR"] < m_deltaRPreselection){
+  if(RJigsawVariables["RJVars_PP_MDeltaR"] < m_mDeltaRPreselection){
     return StatusCode::SUCCESS;
   }
 
