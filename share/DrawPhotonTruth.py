@@ -89,9 +89,9 @@ colours = {"LO" : ROOT.kRed,
 }
 
 filein = {
-    "LO":  {"CVetoBVeto"   :ROOT.TFile("output/user.rsmith.v3.noSegFault.Sherpa_CT10_SinglePhoton_LO.hadd.CVetoBVeto.root"),
-            "CFilterBVeto" :ROOT.TFile("output/user.rsmith.v3.noSegFault.Sherpa_CT10_SinglePhoton_LO.hadd.CFilterBVeto.root"),
-            "BFilter"      :ROOT.TFile("output/user.rsmith.v3.noSegFault.Sherpa_CT10_SinglePhoton_LO.hadd.BFilter.root"),
+    "LO":  {"CVetoBVeto"   :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_SinglePhoton.hadd.CVetoBVeto.root"),
+            "CFilterBVeto" :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_SinglePhoton.hadd.CFilterBVeto.root"),
+            "BFilter"      :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_SinglePhoton.hadd.BFilter.root"),
 
 
 },#ROOT.TFile("output/ZbosonTruthTest.small.root"),#.Sherpa145.root"),

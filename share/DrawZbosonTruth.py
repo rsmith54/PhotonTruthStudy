@@ -111,13 +111,13 @@ colours = {"LO" : ROOT.kRed,
 }
 
 filein = {
-    "LO":  {"CVetoBVeto"   :ROOT.TFile("output/user.rsmith.v3.Sherpa_CT10_Znunu_LO.hadd.CVetoBVeto.root"  ),
-            "CFilterBVeto" :ROOT.TFile("output/user.rsmith.v3.Sherpa_CT10_Znunu_LO.hadd.CFilterBVeto.root"),
-            "BFilter"      :ROOT.TFile("output/user.rsmith.v3.Sherpa_CT10_Znunu_LO.hadd.BFilter.root"     ),
+    "LO":  {"CVetoBVeto"   :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_Znunu_LO.hadd.CVetoBVeto.root"  ),
+            "CFilterBVeto" :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_Znunu_LO.hadd.CFilterBVeto.root"),
+            "BFilter"      :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_Znunu_LO.hadd.BFilter.root"     ),
             },
-    "NLO": {"CVetoBVeto"   :ROOT.TFile("output/user.rsmith.v3.Sherpa_CT10_Znunu_NLO.hadd.CVetoBVeto.root"  ),
-            "CFilterBVeto" :ROOT.TFile("output/user.rsmith.v3.Sherpa_CT10_Znunu_NLO.hadd.CFilterBVeto.root"),
-            "BFilter"      :ROOT.TFile("output/user.rsmith.v3.Sherpa_CT10_Znunu_NLO.hadd.BFilter.root"     ),
+    "NLO": {"CVetoBVeto"   :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_Znunu_NLO.hadd.CVetoBVeto.root"  ),
+            "CFilterBVeto" :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_Znunu_NLO.hadd.CFilterBVeto.root"),
+            "BFilter"      :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_Znunu_NLO.hadd.BFilter.root"     ),
             }
 }
 
@@ -188,12 +188,13 @@ leg.SetFillStyle(0)
 leg.SetBorderSize(0)
 
 #for order in ["NLO"] :
-for order in ["LO","NLO"]:
+#for order in ["LO","NLO"]:
+for order in ["LO"]:
     for histname in histnames :
         stacks[order][histname] = ROOT.THStack("hs_"+order+"_"+histname,"hs_"+order+"_"+histname)
 
 fillcolor = 1;
-for order in ["LO","NLO"]:
+for order in ["LO"]:#,"NLO"]:
 #for order in ["NLO"]:
     hists[order] = {}
 
@@ -238,7 +239,8 @@ c.SetLogy()
 #for order in ["LO","NLO"]:
 outfile = ROOT.TFile("output/outZStack.root", "RECREATE")
 
-for order in ["LO","NLO"]:
+#for order in ["LO","NLO"]:
+for order in ["LO"]:
 #for order in ["NLO"]:
     for histname in histnames:
         c.SetLogx("pt" in histname)
@@ -250,3 +252,5 @@ for order in ["LO","NLO"]:
         leg.Draw()
         stacks[order][histname].Write()
         c.SaveAs("Zplots/"+histname+order+".eps")
+
+#  LocalWords:  filein
