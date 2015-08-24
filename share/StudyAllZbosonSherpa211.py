@@ -26,7 +26,7 @@ from optparse import OptionParser
 #     studyZbosonTruth(fileList)
 
 #ServiceMgr.EventSelector.InputCollections += localFileList
-filelist = []
+filelist = ['/data/users/rsmith/mc15_13TeV.361449.Sherpa_CT10_Znunu_Pt70_140_BFilter.merge.DAOD_TRUTH1.e3651_p2375/DAOD_TRUTH1.05969994._000001.pool.root.1']
 ServiceMgr.EventSelector.InputCollections = filelist
 
 

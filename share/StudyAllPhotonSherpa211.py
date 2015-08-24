@@ -24,7 +24,8 @@ from optparse import OptionParser
 
 #     print fileList
 #     studyPhotonTruth(fileList)
-filelist = []
+#filelist = []
+filelist = ['/data/users/rsmith/mc15_13TeV.361449.Sherpa_CT10_Znunu_Pt70_140_BFilter.merge.DAOD_TRUTH1.e3651_p2375/DAOD_TRUTH1.05969994._000001.pool.root.1']
 ServiceMgr.EventSelector.InputCollections = filelist
 
 
@@ -33,7 +34,7 @@ fileName   = 'PhotonTruthTest.alllarge.root'
 from OutputStreamAthenaPool.MultipleStreamManager import MSMgr
 histoStream = MSMgr.NewRootStream( streamName, 'output/' + fileName)
 
-#theApp.EvtMax = 50000
+#theApp.EvtMax = 500
 
 from AthenaCommon.AlgSequence import AlgSequence
 topSequence = AlgSequence()
