@@ -66,8 +66,8 @@ bfilts = ["CVetoBVeto",
           ]
 
 plotdirs = [
-'GammaPt35',
-'GammaPt70',
+#'GammaPt35',
+#'GammaPt70',
 'GammaPt140',
 'GammaPt280',
 'GammaPt500',

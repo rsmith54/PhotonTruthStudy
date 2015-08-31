@@ -87,8 +87,8 @@ bfilts = ["CVetoBVeto",
           ]
 
 plotdirs = [
-    "ZPt0"    ,
-    "ZPt70",
+#    "ZPt0"    ,
+#    "ZPt70",
     "ZPt140",
     "ZPt280",
     "ZPt500",
