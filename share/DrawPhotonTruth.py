@@ -84,14 +84,23 @@ plotdirs = [
 #            "NLO": 0.080719,
 #            }
 
-colours = {"LO" : ROOT.kRed,
-           "NLO": ROOT.kBlue,
+
+colours = {
+    "LO":  {  "CVetoBVeto"     : ROOT.kRed,
+              "CFilterBVeto"   : ROOT.kGreen,
+              "BFilter"        : ROOT.kBlue,
+
+            },
+    "NLO": {# "CVetoBVeto"   :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_Znunu_NLO.hadd.CVetoBVeto.root"  ),
+            # "CFilterBVeto" :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_Znunu_NLO.hadd.CFilterBVeto.root"),
+            # "BFilter"      :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_Znunu_NLO.hadd.BFilter.root"     ),
+            }
 }
 
 filein = {
-    "LO":  {"CVetoBVeto"   :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_SinglePhoton.hadd.CVetoBVeto.root"),
-            "CFilterBVeto" :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_SinglePhoton.hadd.CFilterBVeto.root"),
-            "BFilter"      :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_SinglePhoton.hadd.BFilter.root"),
+    "LO":  {"CVetoBVeto"   :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_SinglePhoton_LO.hadd.CVetoBVeto.root"),
+            "CFilterBVeto" :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_SinglePhoton_LO.hadd.CFilterBVeto.root"),
+            "BFilter"      :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_SinglePhoton_LO.hadd.BFilter.root"),
 
 
 },#ROOT.TFile("output/ZbosonTruthTest.small.root"),#.Sherpa145.root"),
@@ -205,12 +214,12 @@ for order in ["LO"]:
                 hist.Scale(normalisation)
                 hist.SetLineColor(ROOT.kBlack)
                 #                print "hist getEntries : " + str(hist.GetEntries())
-                #            hist.SetFillColor(colours[order])
-                hist.SetFillColor(fillcolor)
+                hist.SetFillColor(colours[order][bfilt])
+                #hist.SetFillColor(fillcolor)
                 myclone = hist.Clone()
                 stacks[order][histname].Add(myclone)
                 hists[order][bfilt][plotdir][histname] = myclone
-                if len(hists[order])==1:
+                if len(hists[order][bfilt][plotdir])==1:
                     leg.AddEntry(myclone,order+bfilt+plotdir,'f')
 
 
@@ -231,3 +240,5 @@ for order in ["LO"]:
         leg.Draw()
         stacks[order][histname].Write()
         c.SaveAs("gammaPlots/"+histname+order+".eps")
+
+

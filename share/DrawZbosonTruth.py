@@ -106,8 +106,16 @@ plotdirs = [
 #            "NLO": 0.080719,
 #            }
 
-colours = {"LO" : ROOT.kRed,
-           "NLO": ROOT.kBlue,
+colours = {
+    "LO":  {  "CVetoBVeto"     : ROOT.kRed,
+              "CFilterBVeto"   : ROOT.kGreen,
+              "BFilter"        : ROOT.kBlue,
+
+            },
+    "NLO": {# "CVetoBVeto"   :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_Znunu_NLO.hadd.CVetoBVeto.root"  ),
+            # "CFilterBVeto" :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_Znunu_NLO.hadd.CFilterBVeto.root"),
+            # "BFilter"      :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_Znunu_NLO.hadd.BFilter.root"     ),
+            }
 }
 
 filein = {
@@ -115,9 +123,9 @@ filein = {
             "CFilterBVeto" :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_Znunu_LO.hadd.CFilterBVeto.root"),
             "BFilter"      :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_Znunu_LO.hadd.BFilter.root"     ),
             },
-    "NLO": {"CVetoBVeto"   :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_Znunu_NLO.hadd.CVetoBVeto.root"  ),
-            "CFilterBVeto" :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_Znunu_NLO.hadd.CFilterBVeto.root"),
-            "BFilter"      :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_Znunu_NLO.hadd.BFilter.root"     ),
+    "NLO": {# "CVetoBVeto"   :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_Znunu_NLO.hadd.CVetoBVeto.root"  ),
+            # "CFilterBVeto" :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_Znunu_NLO.hadd.CFilterBVeto.root"),
+            # "BFilter"      :ROOT.TFile("output/user.rsmith.v4.fixOR.Sherpa_CT10_Znunu_NLO.hadd.BFilter.root"     ),
             }
 }
 
@@ -225,12 +233,12 @@ for order in ["LO"]:#,"NLO"]:
                 hist.Scale(normalisation)
                 hist.SetLineColor(ROOT.kBlack)
                 print "hist getEntries : " + str(hist.GetEntries())
-                #            hist.SetFillColor(colours[order])
-                hist.SetFillColor(fillcolor)
+                hist.SetFillColor(colours[order][bfilt])
+#                hist.SetFillColor(fillcolor)
                 myclone = hist.Clone()
                 stacks[order][histname].Add(myclone)
                 hists[order][bfilt][plotdir][histname] = myclone
-                if len(hists[order])==1:
+                if len(hists[order][bfilt][plotdir])==1:
                     leg.AddEntry(myclone,order+bfilt+plotdir,'f')
 
 
