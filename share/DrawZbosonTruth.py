@@ -134,54 +134,54 @@ histnames = [
 "Zboson_fspt",
 "Zboson_refeta",
 "Zboson_fseta",
-"Jet_fspt",
-"Jet_fseta",
-"Jet1_fspt",
-"Jet1_fseta",
+# "Jet_fspt",
+# "Jet_fseta",
+# "Jet1_fspt",
+# "Jet1_fseta",
 "Zboson_dRjet",
 "Zboson_dPhiJet",
 "Zboson_dRjmin",
-"Njet20",
-"Njet30",
-"Njet60",
-"Njet100",
-"Njet250",
-"RJVars_PP_Mass"        ,
-"RJVars_PP_InvGamma",
-"RJVars_PP_dPhiBetaR",
-"RJVars_PP_dPhiVis",
-"RJVars_PP_CosTheta",
-"RJVars_PP_dPhiDecayAngle",
-"RJVars_PP_VisShape",
-"RJVars_PP_MDeltaR",
-"RJVars_P1_Mass",
-"RJVars_P1_CosTheta",
-"RJVars_P2_Mass",
-"RJVars_P2_CosTheta",
-"RJVars_I1_Depth",
-"RJVars_I2_Depth",
-"RJVars_V1_N",
-"RJVars_V2_N",
-"RJVars_MG"  ,
-"RJVars_DeltaBetaGG" ,
-"RJVars_dphiVG"	 ,
-"RJVars_P_0_CosTheta"	 ,
-"RJVars_C_0_CosTheta"   ,
-"RJVars_P_0_dPhiGC"	,
-"RJVars_P_0_MassRatioGC",
-"RJVars_P_0_Jet1_pT"	,
-"RJVars_P_0_Jet2_pT"	,
-"RJVars_P_0_PInvHS"      ,
-"RJVars_P_1_CosTheta"    ,
-"RJVars_C_1_CosTheta"	 ,
-"RJVars_P_1_dPhiGC"	 ,
-"RJVars_P_1_MassRatioGC" ,
-"RJVars_P_1_Jet1_pT",
-"RJVars_P_1_Jet2_pT",
-"RJVars_P_1_PInvHS" ,
-"RJVars_QCD_dPhiR"  ,
-"RJVars_QCD_Rpt"    ,
-"RJVars_QCD_Rmsib"
+# "Njet20",
+# "Njet30",
+# "Njet60",
+# "Njet100",
+# "Njet250",
+# "RJVars_PP_Mass"        ,
+# "RJVars_PP_InvGamma",
+# "RJVars_PP_dPhiBetaR",
+# "RJVars_PP_dPhiVis",
+# "RJVars_PP_CosTheta",
+# "RJVars_PP_dPhiDecayAngle",
+# "RJVars_PP_VisShape",
+# "RJVars_PP_MDeltaR",
+# "RJVars_P1_Mass",
+# "RJVars_P1_CosTheta",
+# "RJVars_P2_Mass",
+# "RJVars_P2_CosTheta",
+# "RJVars_I1_Depth",
+# "RJVars_I2_Depth",
+# "RJVars_V1_N",
+# "RJVars_V2_N",
+# "RJVars_MG"  ,
+# "RJVars_DeltaBetaGG" ,
+# "RJVars_dphiVG"	 ,
+# "RJVars_P_0_CosTheta"	 ,
+# "RJVars_C_0_CosTheta"   ,
+# "RJVars_P_0_dPhiGC"	,
+# "RJVars_P_0_MassRatioGC",
+# "RJVars_P_0_Jet1_pT"	,
+# "RJVars_P_0_Jet2_pT"	,
+# "RJVars_P_0_PInvHS"      ,
+# "RJVars_P_1_CosTheta"    ,
+# "RJVars_C_1_CosTheta"	 ,
+# "RJVars_P_1_dPhiGC"	 ,
+# "RJVars_P_1_MassRatioGC" ,
+# "RJVars_P_1_Jet1_pT",
+# "RJVars_P_1_Jet2_pT",
+# "RJVars_P_1_PInvHS" ,
+# "RJVars_QCD_dPhiR"  ,
+# "RJVars_QCD_Rpt"    ,
+# "RJVars_QCD_Rmsib"
 ]
 
 
@@ -245,7 +245,7 @@ for order in ["LO"]:#,"NLO"]:
 c = ROOT.TCanvas("ztruth")
 c.SetLogy()
 #for order in ["LO","NLO"]:
-outfile = ROOT.TFile("output/outZStack.root", "RECREATE")
+#outfile = ROOT.TFile("output/outZStack.root", "RECREATE")
 
 #for order in ["LO","NLO"]:
 for order in ["LO"]:
@@ -258,7 +258,7 @@ for order in ["LO"]:
         stacks[order][histname].GetXaxis().SetTitle(histname)
         stacks[order][histname].GetYaxis().SetTitle("Events / {0} ifb".format(lumi))
         leg.Draw()
-        stacks[order][histname].Write()
-        c.SaveAs("Zplots/"+histname+order+".eps")
+#        stacks[order][histname].Write()
+        c.SaveAs("ZbosonPlots/"+histname+order+".eps")
 
 #  LocalWords:  filein
