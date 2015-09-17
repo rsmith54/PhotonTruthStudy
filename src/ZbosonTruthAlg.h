@@ -14,6 +14,7 @@
 
 class JetProxy;
 class PhysObjProxyUtils;
+class TH1D;
 
 class ZbosonTruthAlg
   : public ::AthHistogramAlgorithm
@@ -57,9 +58,10 @@ class ZbosonTruthAlg
   float	m_refz_ptmax;
   float m_jetRJcut;
   float m_mDeltaRPreselection;
+  int m_ptReweighting;
 
   PhysObjProxyUtils * m_proxyUtils;
-
+  TH1D* m_ptRwHisto;
   /// Default constructor:
   ZbosonTruthAlg();
 

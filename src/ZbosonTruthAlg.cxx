@@ -15,6 +15,8 @@
 #include "GaudiKernel/Property.h"
 
 #include "TH1D.h"
+#include "TFile.h"
+
 
 #include "xAODTruth/TruthParticleContainer.h"
 #include "xAODJet/JetContainer.h"
@@ -41,7 +43,8 @@ ZbosonTruthAlg::ZbosonTruthAlg( const std::string& name,
 
   declareProperty( "ZbosonRef_PtMin", m_refz_ptmin=0 );
   declareProperty( "ZbosonRef_PtMax", m_refz_ptmax=1e9 );
-  declareProperty( "JetRJCut", m_jetRJcut=30000. );
+  declareProperty( "JetRJCut"       , m_jetRJcut=30000. );
+  declareProperty( "doPtReweighting", m_ptReweighting = 2);
   declareProperty( "mDeltaRPreselection", m_mDeltaRPreselection=300000. );
 }
 
@@ -55,6 +58,17 @@ ZbosonTruthAlg::~ZbosonTruthAlg()
 StatusCode ZbosonTruthAlg::initialize()
 {
   ATH_MSG_INFO ("Initializing " << name() << "...");
+  ATH_MSG_INFO ("Checking valid pt reweighting bool " << m_ptReweighting << "...");
+  if(!((m_ptReweighting == 1) ||
+       (m_ptReweighting == 0)
+       ))
+    return StatusCode::FAILURE;
+
+
+  //  TFile rwfile = TFile::Open("PhotonTruthStudy/data/reweightinghistos.root");
+  TFile ptRwfile("/a/home/kolya/rsmith/testarea/gammaFromZ/PhotonTruthStudy/data/reweightinghistos.root");
+  m_ptRwHisto = static_cast<TH1D*>(ptRwfile.Get("Zboson_refpt"));
+  m_ptRwHisto->SetDirectory(0);
 
   m_proxyUtils = new PhysObjProxyUtils(false);
   m_proxyUtils->RJigsawInit();
@@ -203,6 +217,8 @@ StatusCode ZbosonTruthAlg::finalize()
 {
   ATH_MSG_INFO ("Finalizing " << name() << "...");
 
+
+
   return StatusCode::SUCCESS;
 }
 
@@ -270,6 +286,8 @@ StatusCode ZbosonTruthAlg::execute()
   ATH_CHECK( evtStore()->retrieve(eventInfo) );
   double weight=1;
   weight *= eventInfo->mcEventWeight();
+  double ptw =   m_ptRwHisto->GetBinContent(m_ptRwHisto->FindBin(zboson_ref.Pt()));
+  weight *= ptw;
 
   // hist("EvtsProcessed")->Fill("NEvents",1);
   // hist("EvtsProcessed")->Fill("SumWeights",weight);
