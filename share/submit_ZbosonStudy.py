@@ -21,7 +21,7 @@ for sherpaversion in ["Sherpa211"]:
         tmpdir = '/tmp/rsmith/'
         tarball = tmpdir+'ZbosonTruthStudy.'+suffix
 
-        outdataset = 'user.rsmith.v4.fixOR.{dsid}.{shortname}.ZbosonTruthStudy.{suf}'.format(dsid=indscomps[2],shortname=indscomps[3],suf=suffix)
+        outdataset = 'user.rsmith.v5.ptRW.{dsid}.{shortname}.ZbosonTruthStudy.{suf}'.format(dsid=indscomps[2],shortname=indscomps[3],suf=suffix)
         pathtemp = r'pathena --cmtConfig=x86_64-slc6-gcc48-opt --inDS={inds} --outDS={outds}  StudyAllZbosonSherpa211.py --outTarBall={tar} --mergeOutput'
         pathcmd = pathtemp.format(inds=indataset,outds=outdataset,tar=tarball,ver=sherpaversion)
 

@@ -66,7 +66,7 @@ StatusCode ZbosonTruthAlg::initialize()
 
 
   //  TFile rwfile = TFile::Open("PhotonTruthStudy/data/reweightinghistos.root");
-  TFile ptRwfile("/a/home/kolya/rsmith/testarea/gammaFromZ/PhotonTruthStudy/data/reweightinghistos.root");
+  TFile ptRwfile("$TestArea/PhotonTruthStudy/data/reweightinghistos.root");
   m_ptRwHisto = static_cast<TH1D*>(ptRwfile.Get("Zboson_refpt"));
   m_ptRwHisto->SetDirectory(0);
 
@@ -217,7 +217,8 @@ StatusCode ZbosonTruthAlg::finalize()
 {
   ATH_MSG_INFO ("Finalizing " << name() << "...");
 
-
+  delete m_ptRwHisto;
+  delete m_proxyUtils;
 
   return StatusCode::SUCCESS;
 }
@@ -286,7 +287,7 @@ StatusCode ZbosonTruthAlg::execute()
   ATH_CHECK( evtStore()->retrieve(eventInfo) );
   double weight=1;
   weight *= eventInfo->mcEventWeight();
-  double ptw =   m_ptRwHisto->GetBinContent(m_ptRwHisto->FindBin(zboson_ref.Pt()));
+  double ptw =   m_ptRwHisto->GetBinContent(m_ptRwHisto->FindBin(zboson_ref.Pt()/1000.));
   weight *= ptw;
 
   // hist("EvtsProcessed")->Fill("NEvents",1);

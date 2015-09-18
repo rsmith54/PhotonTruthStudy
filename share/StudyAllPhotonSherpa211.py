@@ -41,6 +41,7 @@ topSequence = AlgSequence()
 topSequence += CfgMgr.PhotonTruthAlg("Gamma_35_70",
                                      RootStreamName=streamName,
                                      RootDirName='/GammaPt35',
+                                     doPtReweighting=   2,
                                      PhotonRef_PtMin=   35e3,
                                      PhotonRef_PtMax=   70e3,
                                      JetRJCut       = 20)

@@ -43,45 +43,46 @@ topSequence = AlgSequence()
 topSequence += CfgMgr.ZbosonTruthAlg("Z_0_70",
                                      RootStreamName=streamName,
                                      RootDirName='/ZPt0',
+                                     doPtReweighting = 1,
                                      ZbosonRef_PtMin=0e3,ZbosonRef_PtMax=70e3
                                      ,JetRJCut       = 20)
 topSequence += CfgMgr.ZbosonTruthAlg("Z_70_140",
-                                     RootStreamName=streamName,
+                                     RootStreamName=streamName, doPtReweighting = 1,
                                      RootDirName='/ZPt70',
                                      ZbosonRef_PtMin=70e3,ZbosonRef_PtMax=140e3
                                      ,JetRJCut       = 20)
 topSequence += CfgMgr.ZbosonTruthAlg("Z_140_280",
-                                     RootStreamName=streamName,
+                                     RootStreamName=streamName, doPtReweighting = 1,
                                      RootDirName='/ZPt140',
                                      ZbosonRef_PtMin=140e3,ZbosonRef_PtMax=280e3
                                      ,JetRJCut       = 20)
 topSequence += CfgMgr.ZbosonTruthAlg("Z_280_500",
-                                     RootStreamName=streamName,
+                                     RootStreamName=streamName, doPtReweighting = 1,
                                      RootDirName='/ZPt280',
                                      ZbosonRef_PtMin=280e3,ZbosonRef_PtMax=500e3
                                      ,JetRJCut       = 20)
 topSequence += CfgMgr.ZbosonTruthAlg("Z_500_700",
-                                     RootStreamName=streamName,
+                                     RootStreamName=streamName, doPtReweighting = 1,
                                      RootDirName='/ZPt500',
                                      ZbosonRef_PtMin= 500e3,ZbosonRef_PtMax= 700e3
                                      ,JetRJCut       = 20)
 topSequence += CfgMgr.ZbosonTruthAlg("Z_700_1000",
-                                     RootStreamName=streamName,
+                                     RootStreamName=streamName, doPtReweighting = 1,
                                      RootDirName='/ZPt700',
                                      ZbosonRef_PtMin= 700e3,ZbosonRef_PtMax= 1000e3
                                      ,JetRJCut       = 20)
 topSequence += CfgMgr.ZbosonTruthAlg("Z_1000_2000",
-                                     RootStreamName=streamName,
+                                     RootStreamName=streamName, doPtReweighting = 1,
                                      RootDirName='/ZPt1000',
                                      ZbosonRef_PtMin=1000e3,ZbosonRef_PtMax=2000e3
                                      ,JetRJCut       = 20)
 topSequence += CfgMgr.ZbosonTruthAlg("Z_2000_4000",
-                                     RootStreamName=streamName,
+                                     RootStreamName=streamName, doPtReweighting = 1,
                                      RootDirName='/ZPt2000',
                                      ZbosonRef_PtMin=2000e3,ZbosonRef_PtMax=4000e3
                                      ,JetRJCut       = 20)
 topSequence += CfgMgr.ZbosonTruthAlg("Z_4000_inf",
-                                     RootStreamName=streamName,
+                                     RootStreamName=streamName, doPtReweighting = 1,
                                      RootDirName='/ZPt4000',
                                      ZbosonRef_PtMin=4000e3,ZbosonRef_PtMax=1e9
                                      ,JetRJCut       = 20)
